@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SUNKAR FINANCE — Панель управления</title>
+<link rel="icon" type="image/png" href="https://sunkar-finance-astana.github.io/KZ/img/logo.png">
+<link rel="apple-touch-icon" href="https://sunkar-finance-astana.github.io/KZ/img/logo.png">
+<meta name="theme-color" content="#060D1F">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060D1F;--card:#0F1D38;--green:#00E676;--blue:#2979FF;--text:#E8EFF8;--muted:#7A8FA6;--border:rgba(0,230,118,0.15)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(0,230,118,0.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(41,121,255,0.04) 0%,transparent 60%);pointer-events:none}
+
+/* PIN SCREEN */
+#pinScreen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:100}
+.pin-logo{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.pin-sub{font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:40px}
+.pin-label{font-size:11px;color:var(--green);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px}
+.pin-input{background:#0F1D38;border:1px solid var(--border);border-radius:12px;padding:16px 20px;font-size:24px;color:var(--text);font-family:'Unbounded',sans-serif;text-align:center;width:220px;letter-spacing:0.3em;outline:none;-webkit-text-security:disc}
+.pin-input:focus{border-color:var(--green);box-shadow:0 0 20px rgba(0,230,118,0.2)}
+.pin-btn{margin-top:16px;width:220px;padding:14px;border-radius:12px;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:900;border:none;cursor:pointer;letter-spacing:0.05em}
+.pin-err{color:#ff4444;font-size:12px;margin-top:10px;opacity:0;transition:opacity 0.3s}
+
+/* MAIN */
+#mainPanel{display:none;max-width:500px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1}
+.header{text-align:center;margin-bottom:28px;padding-top:8px}
+.logo{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:14px}
+.card-title{font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:8px;letter-spacing:0.05em}
+.card-title::before{content:'';width:3px;height:16px;background:linear-gradient(var(--green),var(--blue));border-radius:2px}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.field input,.field select{width:100%;background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:13px 14px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;appearance:none;-webkit-appearance:none}
+.field input:focus,.field select:focus{border-color:var(--green)}
+.field .hint{font-size:11px;color:var(--muted);margin-top:5px}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.fee-box{background:linear-gradient(135deg,rgba(0,230,118,0.06),rgba(41,121,255,0.06));border:1px solid rgba(0,230,118,0.2);border-radius:10px;padding:14px;margin-top:4px}
+.fee-box .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.fee-box .val{font-family:'Unbounded',sans-serif;font-size:22px;font-weight:700;color:var(--green);margin-top:4px}
+
+/* TOGGLE */
+.toggle-row{display:flex;background:#070E20;border-radius:10px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,0.06)}
+.toggle-opt{flex:1;padding:11px 8px;text-align:center;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;border:none;background:transparent;letter-spacing:0.04em}
+.toggle-opt.active{background:rgba(0,230,118,0.1);color:var(--green)}
+
+/* RESULT */
+#resultBox{display:none}
+.link-card{background:linear-gradient(135deg,rgba(0,230,118,0.05),rgba(41,121,255,0.05));border:1px solid rgba(0,230,118,0.25);border-radius:16px;padding:18px}
+.link-label{font-size:10px;color:var(--green);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.link-preview{background:#070E20;border-radius:8px;padding:10px 12px;font-size:11px;color:var(--muted);word-break:break-all;line-height:1.6;margin-bottom:14px;border:1px solid rgba(255,255,255,0.05)}
+
+.btn-row{display:flex;gap:8px}
+.btn{flex:1;padding:13px 10px;border-radius:10px;font-size:11px;font-weight:700;font-family:'Unbounded',sans-serif;letter-spacing:0.04em;border:none;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.btn-copy{background:var(--card);border:1px solid var(--border);color:var(--text)}
+.btn-copy:active,.btn-copy.copied{background:rgba(0,230,118,0.1);border-color:var(--green);color:var(--green)}
+.btn-wa{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff}
+.btn-wa:active{transform:scale(0.97)}
+
+.btn-gen{width:100%;padding:16px;border-radius:12px;font-size:13px;font-weight:900;font-family:'Unbounded',sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 25px rgba(0,230,118,0.25);transition:all 0.2s;text-transform:uppercase;margin-top:4px}
+.btn-gen:active{transform:scale(0.98)}
+
+.info-note{background:rgba(41,121,255,0.06);border:1px solid rgba(41,121,255,0.15);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.info-note strong{color:var(--text)}
+
+.doc-info{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#070E20;border-radius:8px;margin-bottom:14px;font-size:12px}
+.doc-info .num{font-family:'Unbounded',sans-serif;font-size:13px;color:var(--green)}
+.doc-info .dt{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- PIN SCREEN -->
+<div id="pinScreen">
+  <img src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE" style="height:44px;width:auto;display:block;margin:0 auto 8px;filter:brightness(1.05)">
+  <div class="pin-sub">Панель управления</div>
+  <div class="pin-label">Введите PIN-код</div>
+  <input type="password" class="pin-input" id="pinInput" maxlength="6" placeholder="••••" onkeydown="if(event.key==='Enter')checkPin()">
+  <button class="pin-btn" onclick="checkPin()">ВОЙТИ</button>
+  <div class="pin-err" id="pinErr">Неверный PIN-код</div>
+</div>
+
+<!-- MAIN PANEL -->
+<div id="mainPanel">
+  <div class="header">
+    <img src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE" style="height:40px;width:auto;display:block;margin:0 auto 6px;filter:brightness(1.05)">
+    <div class="logo-sub">Генератор договоров</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ДАННЫЕ КЛИЕНТА</div>
+    <div class="field">
+      <label>ФИО клиента *</label>
+      <input type="text" id="f_fio" placeholder="Иванов Иван Иванович" autocomplete="off">
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Телефон *</label>
+        <input type="tel" id="f_phone" placeholder="+7 705...">
+      </div>
+      <div class="field">
+        <label>ИИН</label>
+        <input type="text" id="f_iin" placeholder="000000000000" maxlength="12">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ПАРАМЕТРЫ КРЕДИТА</div>
+    <div class="field">
+      <label>Тип кредита</label>
+      <select id="f_type">
+        <option value="0">Беззалоговый (до 10 млн)</option>
+        <option value="1">Под залог недвижимости (до 50 млн)</option>
+        <option value="2">Для ИП / ТОО (до 30 млн)</option>
+        <option value="3">Ипотека</option>
+      </select>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Сумма кредита ₸ *</label>
+        <input type="number" id="f_amount" placeholder="5000000" oninput="calcFee()">
+      </div>
+      <div class="field">
+        <label>Наш % (скрыт от клиента)</label>
+        <select id="f_pct" onchange="calcFee()">
+          <option value="10">10%</option>
+          <option value="9">9%</option>
+          <option value="8">8%</option>
+          <option value="7">7%</option>
+          <option value="5">5%</option>
+        </select>
+      </div>
+    </div>
+    <div class="fee-box">
+      <div class="lbl">Клиент оплачивает нам:</div>
+      <div class="val" id="feeDisplay">— ₸</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ТИП ДОГОВОРА</div>
+    <div class="toggle-row">
+      <button class="toggle-opt active" onclick="setDocType('pre',this)">📋 Предварительный</button>
+      <button class="toggle-opt" onclick="setDocType('main',this)">✅ Основной</button>
+    </div>
+    <div class="info-note" id="docTypeHint">
+      <strong>Предварительный</strong> — подписывается ДО получения кредита. Клиент подтверждает обязательство оплатить услугу после зачисления. Это ваша главная защита.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ДОПОЛНИТЕЛЬНО</div>
+    <div class="row2">
+      <div class="field">
+        <label>Банк (если известен)</label>
+        <input type="text" id="f_bank" placeholder="Kaspi, Halyk...">
+      </div>
+      <div class="field">
+        <label>Номер договора</label>
+        <input type="text" id="f_docnum" placeholder="Авто">
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-gen" onclick="generate()">⚡ СОЗДАТЬ ССЫЛКУ ДЛЯ КЛИЕНТА</button>
+
+  <div id="resultBox" style="margin-top:16px">
+    <div class="link-card">
+      <div class="doc-info">
+        <span class="num" id="res_docnum"></span>
+        <span class="dt" id="res_date"></span>
+      </div>
+      <div class="link-label">Ссылка для клиента</div>
+      <div class="link-preview" id="linkPreview"></div>
+      <div class="btn-row">
+        <button class="btn btn-copy" id="copyBtn" onclick="copyLink()">📋 Копировать</button>
+        <button class="btn btn-wa" onclick="sendWA()">📲 WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// --- PIN ---
+const CORRECT_PIN = '2025'; // ← Можно изменить
+
+function checkPin(){
+  const v = document.getElementById('pinInput').value;
+  if(v === CORRECT_PIN){
+    document.getElementById('pinScreen').style.display='none';
+    document.getElementById('mainPanel').style.display='block';
+  } else {
+    const e = document.getElementById('pinErr');
+    e.style.opacity='1';
+    setTimeout(()=>e.style.opacity='0',2000);
+    document.getElementById('pinInput').value='';
+  }
+}
+
+// --- STATE ---
+let docType = 'pre';
+let generatedLink = '';
+
+// --- FEE CALC ---
+function calcFee(){
+  const a = parseFloat(document.getElementById('f_amount').value)||0;
+  const p = parseFloat(document.getElementById('f_pct').value)||10;
+  if(!a){ document.getElementById('feeDisplay').textContent='— ₸'; return; }
+  const fee = Math.round(a*p/100);
+  document.getElementById('feeDisplay').textContent = fmt(fee)+' ₸';
+}
+
+function fmt(n){ return n.toLocaleString('ru-RU'); }
+
+// --- DOC TYPE ---
+function setDocType(t, el){
+  docType=t;
+  document.querySelectorAll('.toggle-opt').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const hints = {
+    pre:'<strong>Предварительный</strong> — подписывается ДО получения кредита. Клиент подтверждает обязательство оплатить услугу после зачисления. Это ваша главная защита.',
+    main:'<strong>Основной</strong> — подписывается после получения кредита. Подтверждает факт оказанных услуг и фиксирует оплату.'
+  };
+  document.getElementById('docTypeHint').innerHTML = hints[t];
+}
+
+// --- IIN MASK ---
+document.getElementById('f_iin').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,12)});
+
+// --- GENERATE ---
+function generate(){
+  const fio = document.getElementById('f_fio').value.trim();
+  const phone = document.getElementById('f_phone').value.trim();
+  const amount = parseFloat(document.getElementById('f_amount').value)||0;
+  if(!fio||!phone||!amount){ alert('Укажите ФИО, телефон и сумму кредита'); return; }
+
+  const iin = document.getElementById('f_iin').value.trim();
+  const typeIdx = document.getElementById('f_type').value;
+  const pct = parseFloat(document.getElementById('f_pct').value)||10;
+  const fee = Math.round(amount*pct/100);
+  const bank = document.getElementById('f_bank').value.trim();
+  const customNum = document.getElementById('f_docnum').value.trim();
+
+  const now = new Date();
+  const docNum = customNum || ('SF-'+now.getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000));
+
+  // Build URL params — % is hidden from client URL (only fee amount in tenge shown)
+  const params = new URLSearchParams();
+  params.set('n', btoa(encodeURIComponent(fio)));
+  params.set('ph', encodeURIComponent(phone));
+  if(iin) params.set('i', iin);
+  params.set('a', amount);
+  params.set('f', fee);
+  params.set('t', typeIdx);
+  if(bank) params.set('b', encodeURIComponent(bank));
+  params.set('doc', docNum);
+  params.set('dt', docType);
+  params.set('d', now.toISOString().split('T')[0]);
+
+  // The contract page (assumes both files in same folder)
+  const baseUrl = location.origin + location.pathname.replace('admin.html','') + 'dogovor.html';
+  generatedLink = baseUrl + '?' + params.toString();
+
+  document.getElementById('res_docnum').textContent = '№ '+docNum;
+  document.getElementById('res_date').textContent = now.toLocaleDateString('ru-RU');
+  document.getElementById('linkPreview').textContent = generatedLink;
+  document.getElementById('resultBox').style.display='block';
+  document.getElementById('resultBox').scrollIntoView({behavior:'smooth'});
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(generatedLink).then(()=>{
+    const btn = document.getElementById('copyBtn');
+    btn.textContent='✓ Скопировано';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 Копировать';btn.classList.remove('copied')},2000);
+  });
+}
+
+function sendWA(){
+  const fio = document.getElementById('f_fio').value.trim();
+  const msg = `SUNKAR FINANCE\n\nДобрый день, ${fio.split(' ')[1]||fio}!\n\nПожалуйста, ознакомьтесь с договором и подпишите его по ссылке:\n\n${generatedLink}\n\nЭто займёт 2 минуты 👆`;
+  const phone = document.getElementById('f_phone').value.replace(/\D/g,'');
+  const waPhone = phone.startsWith('7')?phone:'7'+phone;
+  window.open('https://wa.me/'+waPhone+'?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>

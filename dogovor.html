@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SUNKAR FINANCE — Подпишите договор</title>
+
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="https://sunkar-finance-astana.github.io/KZ/img/logo.png">
+<link rel="apple-touch-icon" href="https://sunkar-finance-astana.github.io/KZ/img/logo.png">
+
+<!-- OG — превью при отправке в WhatsApp/Telegram -->
+<meta property="og:title" content="Подпишите договор — SUNKAR FINANCE">
+<meta property="og:description" content="Ознакомьтесь с условиями и подпишите договор на оказание услуг. Это займёт 2 минуты.">
+<meta property="og:image" content="https://sunkar-finance-astana.github.io/KZ/img/og-main.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta name="theme-color" content="#060D1F">
+
+<!-- Twitter/Telegram card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Подпишите договор — SUNKAR FINANCE">
+<meta name="twitter:description" content="Ознакомьтесь с условиями и подпишите договор на оказание услуг.">
+<meta name="twitter:image" content="https://sunkar-finance-astana.github.io/KZ/img/og-main.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060D1F;--card:#0F1D38;--green:#00E676;--blue:#2979FF;--text:#E8EFF8;--muted:#7A8FA6;--border:rgba(0,230,118,0.15)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 10% 10%,rgba(0,230,118,0.05) 0%,transparent 50%),radial-gradient(ellipse at 90% 90%,rgba(41,121,255,0.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+
+/* PROGRESS BAR */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.05);z-index:100}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));transition:width 0.4s ease;width:25%}
+
+/* SCREEN SYSTEM */
+.screen{display:none;position:relative;z-index:1;padding:0 0 40px;min-height:100vh}
+.screen.active{display:block}
+
+/* ===== SCREEN 1: INTRO ===== */
+#s1{padding:0}
+.hero{background:linear-gradient(180deg,#0A1A0A 0%,var(--bg) 100%);padding:40px 20px 32px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.25);border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
+.hero-badge::before{content:'●';font-size:7px;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-logo{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.hero-title{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700;color:var(--muted);letter-spacing:0.05em}
+
+.intro-pad{padding:20px}
+.welcome-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:14px}
+.wc-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.wc-name{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+
+.amounts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.amount-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+.ac-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.ac-val{font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;color:var(--text)}
+.amount-card.fee-card{border-color:rgba(41,121,255,0.25);background:rgba(41,121,255,0.06)}
+.amount-card.fee-card .ac-val{color:var(--blue)}
+
+.type-badge{background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.type-badge strong{color:var(--green)}
+
+.pre-notice{background:rgba(255,180,0,0.06);border:1px solid rgba(255,180,0,0.2);border-radius:10px;padding:14px;margin-bottom:14px;font-size:12px;line-height:1.7;color:#FFD54F}
+.pre-notice .notice-title{font-weight:700;font-size:13px;margin-bottom:4px}
+
+.steps-list{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:20px}
+.step-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.step-item:last-child{border-bottom:none}
+.step-num{width:28px;height:28px;border-radius:50%;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green);font-family:'Unbounded',sans-serif;flex-shrink:0}
+.step-text{font-size:12px;color:var(--muted)}
+
+/* ===== SCREEN 2: CONTRACT ===== */
+#s2{padding:20px}
+.section-header{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-header::before{content:'';width:3px;height:16px;background:linear-gradient(var(--green),var(--blue));border-radius:2px}
+
+.contract-box{background:#070E20;border:1px solid rgba(255,255,255,0.06);border-radius:14px;height:380px;overflow-y:auto;padding:20px;margin-bottom:12px}
+.contract-box::-webkit-scrollbar{width:3px}
+.contract-box::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+.contract-box::-webkit-scrollbar-track{background:transparent}
+
+.c-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;color:var(--green);margin:18px 0 8px;letter-spacing:0.04em}
+.c-title:first-child{margin-top:0}
+.c-p{font-size:12.5px;line-height:1.75;color:#B0BEC5;margin-bottom:9px}
+.c-p strong{color:var(--text)}
+.c-item{font-size:12.5px;line-height:1.7;color:#B0BEC5;padding-left:16px;position:relative;margin-bottom:6px}
+.c-item::before{content:'—';position:absolute;left:0;color:var(--green)}
+.c-hl{background:rgba(0,230,118,0.05);border-left:2px solid var(--green);padding:10px 12px;border-radius:0 6px 6px 0;margin:10px 0;font-size:12.5px;color:var(--text)}
+
+.read-progress{height:2px;background:rgba(255,255,255,0.05);border-radius:2px;margin-bottom:12px}
+.read-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:2px;width:0%;transition:width 0.2s}
+.read-status{text-align:center;font-size:11px;color:var(--muted);margin-bottom:16px;transition:all 0.3s}
+.read-status.done{color:var(--green)}
+
+.agree-label{display:flex;align-items:flex-start;gap:12px;background:rgba(0,230,118,0.04);border:1px solid rgba(0,230,118,0.12);border-radius:12px;padding:14px;cursor:pointer}
+.agree-label input[type=checkbox]{width:20px;height:20px;accent-color:var(--green);flex-shrink:0;margin-top:2px}
+.agree-text{font-size:12px;line-height:1.6;color:var(--text)}
+
+/* ===== SCREEN 3: SIGN ===== */
+#s3{padding:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.field input{width:100%;background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:13px 14px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
+.field input:focus{border-color:var(--green);box-shadow:0 0 15px rgba(0,230,118,0.1)}
+.field .hint{font-size:11px;color:var(--muted);margin-top:5px}
+.field input.err{border-color:#ff5555}
+
+.sig-area{background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;position:relative;margin-bottom:8px}
+#sigCanvas{display:block;width:100%;height:150px;cursor:crosshair;touch-action:none}
+.canvas-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;color:var(--muted);pointer-events:none;transition:opacity 0.3s;text-align:center;line-height:1.5}
+.sig-clear{width:100%;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:8px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;margin-bottom:14px}
+.sig-clear:hover{border-color:#ff5555;color:#ff5555}
+
+.consent-box{background:rgba(41,121,255,0.05);border:1px solid rgba(41,121,255,0.15);border-radius:10px;padding:12px 14px;font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+
+/* ===== SCREEN 4: SUCCESS ===== */
+#s4{padding:20px;text-align:center}
+.success-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--green),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:30px auto 20px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(0,230,118,0.3)}50%{box-shadow:0 0 50px rgba(0,230,118,0.6)}}
+.success-title{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.success-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+
+.receipt{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:left;margin-bottom:16px}
+.receipt-row{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12.5px;gap:10px}
+.receipt-row:last-child{border-bottom:none}
+.r-lbl{color:var(--muted);flex-shrink:0}
+.r-val{color:var(--text);font-weight:500;text-align:right}
+.receipt-code{background:#070E20;border-radius:8px;padding:10px;text-align:center;margin-top:10px;font-family:monospace;font-size:11px;color:var(--muted);word-break:break-all}
+.receipt-code strong{color:var(--green);display:block;font-size:13px;margin-bottom:2px}
+
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:12px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;border:none;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;text-decoration:none}
+
+/* BOTTOM BUTTON */
+.bottom-btn{position:sticky;bottom:0;padding:12px 20px 20px;background:linear-gradient(0deg,var(--bg) 70%,transparent);margin:-1px -20px 0;margin-top:20px}
+.next-btn{width:100%;padding:16px;border-radius:12px;font-size:13px;font-weight:900;font-family:'Unbounded',sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 25px rgba(0,230,118,0.25);transition:all 0.2s;text-transform:uppercase}
+.next-btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
+.next-btn:active:not(:disabled){transform:scale(0.98)}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ===== SCREEN 1: INTRO ===== -->
+<div class="screen active" id="s1">
+  <div class="hero">
+    <div class="hero-badge">Электронный договор</div>
+    <img src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE" style="height:52px;width:auto;margin:0 auto 10px;display:block;filter:brightness(1.05)">
+    <div class="hero-title">Финансовый консалтинг · Астана</div>
+  </div>
+  <div class="intro-pad">
+
+    <div class="welcome-card">
+      <div class="wc-label">Договор подготовлен для</div>
+      <div class="wc-name" id="i_name">—</div>
+    </div>
+
+    <div class="amounts-grid">
+      <div class="amount-card">
+        <div class="ac-lbl">Сумма кредита</div>
+        <div class="ac-val" id="i_amount">—</div>
+      </div>
+      <div class="amount-card fee-card">
+        <div class="ac-lbl">Наше вознаграждение</div>
+        <div class="ac-val" id="i_fee">—</div>
+      </div>
+    </div>
+
+    <div class="type-badge">
+      Услуга: <strong id="i_type">—</strong><br>
+      <span id="i_bank_wrap" style="display:none">Банк: <strong id="i_bank">—</strong><br></span>
+      Выплата вознаграждения: <strong>только после получения кредита</strong>
+    </div>
+
+    <div class="pre-notice" id="preNotice" style="display:none">
+      <div class="notice-title">⚠️ Важно</div>
+      Настоящий договор подписывается до получения кредитных средств. Он фиксирует ваше обязательство оплатить услугу в течение 3 рабочих дней после зачисления кредита на ваш счёт.
+    </div>
+
+    <div class="steps-list">
+      <div class="step-item"><div class="step-num">1</div><div class="step-text">Читаете условия договора</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-text">Указываете ваш ИИН</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-text">Ставите электронную подпись</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-text">Получаете подтверждение</div></div>
+    </div>
+
+    <div class="bottom-btn">
+      <button class="next-btn" onclick="go(2)">Читать договор →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 2: CONTRACT ===== -->
+<div class="screen" id="s2">
+  <div class="section-header" style="padding:20px 20px 0">ТЕКСТ ДОГОВОРА</div>
+  <div style="padding:0 20px">
+
+    <div class="read-progress"><div class="read-fill" id="readFill"></div></div>
+    <div class="read-status" id="readStatus">↓ Прокрутите до конца, чтобы продолжить</div>
+
+    <div class="contract-box" id="contractBox"></div>
+
+    <div class="agree-label" id="agreeWrap" style="opacity:0.4;pointer-events:none;margin:14px 0">
+      <input type="checkbox" id="agreeChk" onchange="checkAgree()">
+      <span class="agree-text">Я ознакомился(лась) с условиями договора, понимаю и принимаю их. Подтверждаю достоверность своих данных.</span>
+    </div>
+
+    <div class="bottom-btn">
+      <button class="next-btn" id="nextBtn2" disabled onclick="go(3)">Перейти к подписанию →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 3: SIGN ===== -->
+<div class="screen" id="s3">
+  <div style="padding:20px">
+    <div class="section-header">ВАШИ ДАННЫЕ И ПОДПИСЬ</div>
+
+    <div class="field">
+      <label>ФИО (проверьте)</label>
+      <input type="text" id="s_fio" readonly>
+    </div>
+    <div class="field">
+      <label>Номер телефона</label>
+      <input type="tel" id="s_phone">
+    </div>
+    <div class="field">
+      <label>ИИН *</label>
+      <input type="text" id="s_iin" placeholder="000000000000" maxlength="12" oninput="this.value=this.value.replace(/\D/g,'').substring(0,12)">
+      <div class="hint">Индивидуальный идентификационный номер — 12 цифр</div>
+    </div>
+
+    <div class="field">
+      <label>Электронная подпись</label>
+      <div class="sig-area">
+        <canvas id="sigCanvas"></canvas>
+        <div class="canvas-hint" id="canvasHint">Подпишитесь пальцем<br>или мышью</div>
+      </div>
+      <button class="sig-clear" onclick="clearSig()">✕ Очистить подпись</button>
+    </div>
+
+    <div class="consent-box">
+      Нажимая «Подписать», вы даёте согласие на обработку персональных данных согласно Закону РК №94-V от 21.05.2013. Данные используются исключительно в целях оказания услуг по настоящему договору.
+    </div>
+
+    <div class="bottom-btn">
+      <button class="next-btn" onclick="submitSign()">✓ ПОДПИСАТЬ ДОГОВОР</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 4: SUCCESS ===== -->
+<div class="screen" id="s4">
+  <div class="success-icon">✓</div>
+  <div class="success-title">ПОДПИСАНО</div>
+  <p class="success-sub">Договор подписан. Менеджер SUNKAR FINANCE свяжется с вами для уточнения деталей.</p>
+
+  <div class="receipt" id="receiptBlock"></div>
+
+  <a class="wa-btn" id="contactWA" href="#" target="_blank">
+    💬 Написать менеджеру в WhatsApp
+  </a>
+
+  <p style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6">
+    Сохраните этот экран как подтверждение.<br>
+    SUNKAR FINANCE · г. Астана, пр. Абая 18, БЦ Шахар
+  </p>
+</div>
+
+<script>
+// ============ PARSE PARAMS ============
+const P = Object.fromEntries(new URLSearchParams(location.search));
+const TYPES = ['Беззалоговый потребительский кредит','Кредит под залог недвижимости','Кредит для ИП/ТОО','Ипотечный кредит'];
+
+let clientName = '', clientPhone = '', clientIin = '', creditAmount = 0, feeAmount = 0, creditType = '', bankName = '', docNum = '', docDate = '', docType = 'pre';
+
+function initParams(){
+  try{ clientName = decodeURIComponent(atob(P.n||'')); }catch(e){ clientName = 'Клиент'; }
+  clientPhone = decodeURIComponent(P.ph||'');
+  clientIin = P.i||'';
+  creditAmount = parseFloat(P.a)||0;
+  feeAmount = parseFloat(P.f)||0;
+  creditType = TYPES[parseInt(P.t)||0]||TYPES[0];
+  bankName = decodeURIComponent(P.b||'');
+  docNum = P.doc||('SF-'+new Date().getFullYear()+'-0000');
+  docDate = P.d||new Date().toISOString().split('T')[0];
+  docType = P.dt||'pre';
+}
+
+function fmt(n){ return n.toLocaleString('ru-RU'); }
+function fmtDate(d){ try{ return new Date(d+'T12:00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}); }catch(e){ return d; } }
+
+// ============ INIT ============
+initParams();
+
+// Screen 1
+document.getElementById('i_name').textContent = clientName;
+document.getElementById('i_amount').textContent = creditAmount ? fmt(creditAmount)+' ₸' : '—';
+document.getElementById('i_fee').textContent = feeAmount ? fmt(feeAmount)+' ₸' : '—';
+document.getElementById('i_type').textContent = creditType;
+if(bankName){ document.getElementById('i_bank').textContent=bankName; document.getElementById('i_bank_wrap').style.display=''; }
+if(docType==='pre') document.getElementById('preNotice').style.display='block';
+
+// Screen 3
+document.getElementById('s_fio').value = clientName;
+document.getElementById('s_phone').value = clientPhone;
+if(clientIin) document.getElementById('s_iin').value = clientIin;
+
+// Contract text
+buildContract();
+
+// ============ CONTRACT TEXT ============
+function buildContract(){
+  const dateStr = fmtDate(docDate);
+  const preText = docType==='pre'
+    ? `<div class="c-hl">⚠️ Настоящий договор является <strong>предварительным</strong> и подписывается Заказчиком до момента фактического получения кредитных средств. С момента подписания у Заказчика возникает обязательство выплатить вознаграждение Исполнителю согласно условиям раздела 3.</div>`
+    : '';
+  const html = `
+<div class="c-title">ДОГОВОР ОБ ОКАЗАНИИ КОНСУЛЬТАЦИОННЫХ УСЛУГ</div>
+<p class="c-p">Договор № <strong>${docNum}</strong> &nbsp;|&nbsp; ${dateStr}</p>
+<p class="c-p"><strong>Исполнитель:</strong> Калиев Темиржан, действующий под брендом SUNKAR FINANCE, г. Астана, тел. +7 705 260 66 67.</p>
+<p class="c-p"><strong>Заказчик:</strong> ${clientName}${clientPhone?', тел. '+clientPhone:''}.</p>
+<p class="c-p">Стороны заключили настоящий договор о нижеследующем.</p>
+${preText}
+
+<div class="c-title">1. ПРЕДМЕТ ДОГОВОРА</div>
+<p class="c-p">1.1. Исполнитель оказывает Заказчику консультационные услуги в сфере кредитования: подбор кредитного продукта, подготовку документов и сопровождение заявки до момента получения одобрения.</p>
+<p class="c-p">1.2. Цель: получение Заказчиком <strong>${creditType}</strong>${creditAmount?` на сумму <strong>${fmt(creditAmount)} тенге</strong>`:''}${bankName?' в '+bankName:''}.</p>
+<p class="c-p">1.3. Исполнитель не является банком или МФО и не выдаёт кредиты от своего имени. Решение об одобрении принимает кредитная организация.</p>
+
+<div class="c-title">2. ОБЯЗАННОСТИ СТОРОН</div>
+<p class="c-p"><strong>Исполнитель обязуется:</strong></p>
+<div class="c-item">провести анализ кредитной истории Заказчика;</div>
+<div class="c-item">подобрать оптимальные кредитные условия;</div>
+<div class="c-item">подготовить и подать документы в кредитную организацию;</div>
+<div class="c-item">сопровождать Заказчика до получения решения и выдачи кредита;</div>
+<div class="c-item">соблюдать конфиденциальность персональных данных Заказчика.</div>
+<p class="c-p" style="margin-top:10px"><strong>Заказчик обязуется:</strong></p>
+<div class="c-item">предоставить достоверные данные о финансовом положении;</div>
+<div class="c-item">подтвердить отсутствие текущих просрочек по кредитам;</div>
+<div class="c-item">своевременно предоставлять запрашиваемые документы;</div>
+<div class="c-item">выплатить вознаграждение Исполнителю в соответствии с разделом 3.</div>
+
+<div class="c-title">3. СТОИМОСТЬ И ОПЛАТА</div>
+${feeAmount?`<p class="c-p">3.1. Вознаграждение Исполнителя составляет <strong>${fmt(feeAmount)} тенге</strong>.</p>`:'<p class="c-p">3.1. Размер вознаграждения согласован сторонами.</p>'}
+<div class="c-hl"><strong>Без предоплаты.</strong> Вознаграждение выплачивается исключительно после фактического зачисления кредитных средств на счёт Заказчика — в течение 3 (трёх) рабочих дней с момента получения. В случае отказа банка никаких платежей не производится.</div>
+<p class="c-p">3.3. Факт оказания услуг подтверждается Актом выполненных работ, подписанным обеими сторонами.</p>
+
+<div class="c-title">4. ОТВЕТСТВЕННОСТЬ</div>
+<p class="c-p">4.1. Уклонение от выплаты вознаграждения после получения кредита является нарушением настоящего договора. Исполнитель вправе взыскать задолженность в судебном порядке согласно ГК РК.</p>
+<p class="c-p">4.2. Исполнитель не несёт ответственности за отказ кредитной организации при условии добросовестного исполнения своих обязательств.</p>
+<p class="c-p">4.3. При предоставлении Заказчиком заведомо ложных сведений Исполнитель вправе расторгнуть договор.</p>
+
+<div class="c-title">5. ПЕРСОНАЛЬНЫЕ ДАННЫЕ</div>
+<p class="c-p">5.1. Подписывая договор, Заказчик даёт согласие на обработку персональных данных согласно Закону РК «О персональных данных и их защите» №94-V от 21.05.2013 в целях оказания услуг по настоящему договору.</p>
+<p class="c-p">5.2. Данные могут быть переданы в банки и МФО исключительно для целей подачи кредитной заявки.</p>
+
+<div class="c-title">6. ПРОЧИЕ УСЛОВИЯ</div>
+<p class="c-p">6.1. Договор вступает в силу с момента электронного подписания и действует до полного исполнения обязательств.</p>
+<p class="c-p">6.2. До момента подачи заявки в банк Заказчик вправе расторгнуть договор в одностороннем порядке без финансовых обязательств.</p>
+<p class="c-p">6.3. Споры разрешаются в соответствии с законодательством Республики Казахстан.</p>
+<p class="c-p">6.4. Электронное подписание настоящего договора равнозначно собственноручной подписи согласно ст. 395 ГК РК.</p>
+`;
+  document.getElementById('contractBox').innerHTML = html;
+
+  // Scroll tracking
+  const box = document.getElementById('contractBox');
+  box.addEventListener('scroll',()=>{
+    const pct = box.scrollTop/(box.scrollHeight-box.clientHeight)*100;
+    document.getElementById('readFill').style.width = Math.min(pct,100)+'%';
+    if(pct>88){
+      document.getElementById('readStatus').textContent='✓ Договор прочитан';
+      document.getElementById('readStatus').className='read-status done';
+      document.getElementById('agreeWrap').style.opacity='1';
+      document.getElementById('agreeWrap').style.pointerEvents='auto';
+    }
+  });
+}
+
+function checkAgree(){
+  document.getElementById('nextBtn2').disabled = !document.getElementById('agreeChk').checked;
+}
+
+// ============ CANVAS SIGNATURE ============
+const canvas = document.getElementById('sigCanvas');
+const ctx = canvas.getContext('2d');
+let drawing=false, hasSig=false;
+
+function initCanvas(){
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=rect.width*dpr||canvas.offsetWidth*dpr;
+  canvas.height=(canvas.offsetHeight||150)*dpr;
+  ctx.scale(dpr,dpr);
+  ctx.strokeStyle='#00E676';
+  ctx.lineWidth=2.5;
+  ctx.lineCap='round';
+  ctx.lineJoin='round';
+}
+
+canvas.addEventListener('mousedown',e=>{drawing=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();hasSig=true;document.getElementById('canvasHint').style.opacity='0'});
+canvas.addEventListener('mouseup',()=>drawing=false);
+canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();hasSig=true;document.getElementById('canvasHint').style.opacity='0'},{passive:false});
+canvas.addEventListener('touchend',()=>drawing=false);
+function getPos(e){const r=canvas.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top}}
+function clearSig(){ctx.clearRect(0,0,canvas.width,canvas.height);hasSig=false;document.getElementById('canvasHint').style.opacity='1'}
+
+// ============ SUBMIT ============
+function submitSign(){
+  const iin = document.getElementById('s_iin').value.trim();
+  const phone = document.getElementById('s_phone').value.trim();
+  if(!iin||iin.length!==12){ document.getElementById('s_iin').classList.add('err'); alert('Укажите ИИН — 12 цифр'); return; }
+  if(!phone){ document.getElementById('s_phone').classList.add('err'); alert('Укажите номер телефона'); return; }
+  if(!hasSig){ alert('Пожалуйста, поставьте подпись'); return; }
+
+  clientPhone = phone;
+  clientIin = iin;
+
+  const now = new Date();
+  const timeStr = now.toLocaleString('ru-RU',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  const code = 'SF-'+docNum+'-'+Math.random().toString(36).substring(2,6).toUpperCase();
+
+  // Build receipt
+  document.getElementById('receiptBlock').innerHTML = `
+    <div class="receipt-row"><span class="r-lbl">Клиент</span><span class="r-val">${clientName}</span></div>
+    <div class="receipt-row"><span class="r-lbl">Телефон</span><span class="r-val">${clientPhone}</span></div>
+    <div class="receipt-row"><span class="r-lbl">ИИН</span><span class="r-val">${clientIin.substring(0,4)}****${clientIin.substring(8)}</span></div>
+    <div class="receipt-row"><span class="r-lbl">Услуга</span><span class="r-val">${creditType}</span></div>
+    ${creditAmount?`<div class="receipt-row"><span class="r-lbl">Кредит</span><span class="r-val">${fmt(creditAmount)} ₸</span></div>`:''}
+    ${feeAmount?`<div class="receipt-row"><span class="r-lbl">Вознаграждение</span><span class="r-val">${fmt(feeAmount)} ₸</span></div>`:''}
+    <div class="receipt-row"><span class="r-lbl">Договор</span><span class="r-val">№ ${docNum}</span></div>
+    <div class="receipt-row"><span class="r-lbl">Подписан</span><span class="r-val">${timeStr}</span></div>
+    <div class="receipt-code"><strong>${code}</strong>Код подтверждения</div>
+  `;
+
+  document.getElementById('contactWA').href = 'https://wa.me/77052606667?text='+encodeURIComponent(`Здравствуйте! Я подписал(а) договор SUNKAR FINANCE.\nКод подтверждения: ${code}\nИмя: ${clientName}`);
+
+  go(4);
+
+  // Notify Temirjan automatically
+  const notif = `✅ *ДОГОВОР ПОДПИСАН*\n\n👤 ${clientName}\n📱 ${clientPhone}\nИИН: ${clientIin}\n\n💼 ${creditType}${creditAmount?'\n💰 Кредит: '+fmt(creditAmount)+' ₸':''}\n${feeAmount?'💵 Наша сумма: '+fmt(feeAmount)+' ₸\n':''}\n📄 Договор №${docNum}\n🕐 ${timeStr}\n🔑 Код: ${code}`;
+  setTimeout(()=>{
+    window.open('https://wa.me/77052606667?text='+encodeURIComponent(notif),'_blank');
+  },1500);
+}
+
+// ============ NAVIGATION ============
+let currentScreen = 1;
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  currentScreen=n;
+  const fills={1:25,2:50,3:75,4:100};
+  document.getElementById('progressFill').style.width=fills[n]+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n===3){setTimeout(initCanvas,100)}
+}
+
+// Init canvas size after load
+window.addEventListener('load',()=>{ if(currentScreen===3)initCanvas(); });
+window.addEventListener('resize',()=>{ if(currentScreen===3)initCanvas(); });
+</script>
+</body>
+</html>
