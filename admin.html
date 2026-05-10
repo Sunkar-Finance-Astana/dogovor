@@ -12,15 +12,10 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(0,230,118,0.05) 0%,transparent 55%),radial-gradient(ellipse at 80% 80%,rgba(41,121,255,0.05) 0%,transparent 55%);pointer-events:none}
-
-/* PIN */
 #pinScreen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:100}
 .pin-logo{font-family:Unbounded,sans-serif;font-size:18px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
 .pin-sub{font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:36px}
 .pin-lbl{font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
-.pin-inp{background:#0F1D38;border:1px solid var(--border);border-radius:12px;padding:15px 20px;font-size:22px;color:var(--text);font-family:Unbounded,sans-serif;text-align:center;width:210px;letter-spacing:0.3em;outline:none;-webkit-text-security:disc}
-.pin-inp:focus{border-color:var(--green)}
-.pin-btn{margin-top:14px;width:210px;padding:14px;border-radius:12px;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;font-family:Unbounded,sans-serif;font-size:11px;font-weight:900;border:none;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase}
 .pin-err{color:#ff4444;font-size:11px;margin-top:10px;opacity:0;transition:opacity 0.3s}
 .pin-dots{font-size:28px;color:var(--green);letter-spacing:12px;margin-bottom:24px;font-family:Unbounded,sans-serif;min-height:36px}
 .numpad{display:grid;grid-template-columns:repeat(3,72px);gap:10px;margin-top:4px}
@@ -29,18 +24,13 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .np-del{font-size:18px;color:var(--muted)}
 .np-ok{background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;border:none;font-size:20px}
 .np-ok:active{transform:scale(0.93)}
-
-/* MAIN */
 #main{display:none;max-width:500px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1}
 .top{text-align:center;margin-bottom:24px;padding-top:8px}
 .top-logo{height:44px;width:auto;display:block;margin:0 auto 6px;filter:drop-shadow(0 0 12px rgba(0,230,118,0.3))}
 .top-sub{font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
-
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px}
 .ct{font-family:Unbounded,sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:0.05em}
 .ct::before{content:"";width:3px;height:14px;background:linear-gradient(var(--green),var(--blue));border-radius:2px}
-
-/* SIG SECTION */
 .sig-saved{display:none;background:#070E20;border:1px solid rgba(0,230,118,0.2);border-radius:10px;padding:10px;text-align:center;margin-bottom:10px}
 .sig-saved img{max-height:50px;filter:invert(1) sepia(1) saturate(5) hue-rotate(100deg)}
 .sig-saved-lbl{font-size:10px;color:var(--green);font-weight:700;margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase}
@@ -48,34 +38,24 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 #adminCanvas{display:block;width:100%;height:120px;cursor:crosshair;touch-action:none}
 .canvas-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;color:var(--muted);pointer-events:none;text-align:center;line-height:1.5}
 .row2{display:flex;gap:8px}
-.btn-s{flex:1;padding:10px;border-radius:9px;font-size:11px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.03em}
+.btn-s{flex:1;padding:10px;border-radius:9px;font-size:11px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;border:none;transition:all 0.2s}
 .btn-save{background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F}
 .btn-clear{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted)}
 .btn-change{background:transparent;border:1px solid rgba(0,230,118,0.2);color:var(--green);font-size:11px;width:100%;padding:9px;border-radius:9px;cursor:pointer;font-family:Inter,sans-serif;margin-top:7px}
-
-/* FORM */
 .field{margin-bottom:11px}
 .field label{display:block;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
 .field input,.field select{width:100%;background:#070E20;border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:12px 13px;font-size:14px;color:var(--text);font-family:Inter,sans-serif;outline:none;transition:border-color 0.2s;-webkit-appearance:none}
 .field input:focus,.field select:focus{border-color:var(--green)}
 .field .hint{font-size:10px;color:var(--muted);margin-top:4px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-/* FEE BOX */
 .fee-box{background:linear-gradient(135deg,rgba(0,230,118,0.05),rgba(41,121,255,0.05));border:1px solid rgba(0,230,118,0.18);border-radius:10px;padding:13px;margin-top:2px}
 .fee-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
 .fee-val{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;color:var(--green)}
-
-/* TOGGLE */
 .toggle{display:flex;background:#070E20;border-radius:9px;overflow:hidden;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}
-.topt{flex:1;padding:11px 6px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;border:none;background:transparent;font-family:Inter,sans-serif;letter-spacing:0.03em;transition:all 0.2s}
+.topt{flex:1;padding:11px 6px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;border:none;background:transparent;font-family:Inter,sans-serif;transition:all 0.2s}
 .topt.active{background:rgba(0,230,118,0.09);color:var(--green)}
-
-/* GENERATE BTN */
 .btn-gen{width:100%;padding:16px;border-radius:12px;font-size:12px;font-weight:900;font-family:Unbounded,sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 22px rgba(0,230,118,0.25);text-transform:uppercase;margin-top:4px;transition:all 0.2s}
 .btn-gen:active{transform:scale(0.98)}
-
-/* RESULT */
 #result{display:none;margin-top:12px}
 .link-card{background:linear-gradient(135deg,rgba(0,230,118,0.05),rgba(41,121,255,0.05));border:1px solid rgba(0,230,118,0.22);border-radius:14px;padding:16px}
 .link-lbl{font-size:10px;color:var(--green);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px}
@@ -84,44 +64,45 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .doc-num{font-family:Unbounded,sans-serif;font-size:12px;color:var(--green)}
 .doc-dt{color:var(--muted)}
 .brow{display:flex;gap:8px}
-.bcopy{flex:1;padding:12px;border-radius:9px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.2s;letter-spacing:0.04em}
+.bcopy{flex:1;padding:12px;border-radius:9px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
 .bcopy.ok{background:rgba(0,230,118,0.1);border-color:var(--green);color:var(--green)}
-.bwa{flex:1;padding:12px;border-radius:9px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:0.04em}
-
-/* DOC TYPE HINT */
+.bwa{flex:1;padding:12px;border-radius:9px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;border:none;cursor:pointer;text-transform:uppercase}
 .type-hint{background:rgba(41,121,255,0.05);border:1px solid rgba(41,121,255,0.12);border-radius:9px;padding:11px 13px;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:2px}
 .type-hint strong{color:var(--text)}
 </style>
 </head>
 <body>
 
-<!-- PIN -->
 <div id="pinScreen">
   <div class="pin-logo">SUNKAR FINANCE</div>
   <div class="pin-sub">Панель управления</div>
   <div class="pin-lbl">PIN-код</div>
   <div class="pin-dots" id="pinDots">● ● ● ●</div>
   <div class="numpad">
-    <button class="np" onclick="np(1)">1</button><button class="np" onclick="np(2)">2</button><button class="np" onclick="np(3)">3</button>
-    <button class="np" onclick="np(4)">4</button><button class="np" onclick="np(5)">5</button><button class="np" onclick="np(6)">6</button>
-    <button class="np" onclick="np(7)">7</button><button class="np" onclick="np(8)">8</button><button class="np" onclick="np(9)">9</button>
-    <button class="np np-del" onclick="npDel()">⌫</button><button class="np" onclick="np(0)">0</button><button class="np np-ok" onclick="checkPin()">✓</button>
+    <button class="np" onclick="np(1)">1</button>
+    <button class="np" onclick="np(2)">2</button>
+    <button class="np" onclick="np(3)">3</button>
+    <button class="np" onclick="np(4)">4</button>
+    <button class="np" onclick="np(5)">5</button>
+    <button class="np" onclick="np(6)">6</button>
+    <button class="np" onclick="np(7)">7</button>
+    <button class="np" onclick="np(8)">8</button>
+    <button class="np" onclick="np(9)">9</button>
+    <button class="np np-del" onclick="npDel()">⌫</button>
+    <button class="np" onclick="np(0)">0</button>
+    <button class="np np-ok" onclick="checkPin()">✓</button>
   </div>
   <div class="pin-err" id="pinErr">Неверный PIN</div>
 </div>
 
-<!-- MAIN -->
 <div id="main">
   <div class="top">
     <img class="top-logo" src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE">
     <div class="top-sub">Генератор договоров</div>
   </div>
 
-  <!-- ПОДПИСЬ КОМПАНИИ -->
   <div class="card">
     <div class="ct">МОЯ ПОДПИСЬ</div>
-
-    <!-- Saved state -->
     <div id="sigSavedWrap" style="display:none">
       <div class="sig-saved" id="sigSavedBox">
         <div class="sig-saved-lbl">✓ Подпись сохранена</div>
@@ -129,22 +110,19 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
       </div>
       <button class="btn-change" onclick="changeSig()">✎ Изменить подпись</button>
     </div>
-
-    <!-- Draw state -->
     <div id="sigDrawWrap">
       <div class="sig-area">
         <canvas id="adminCanvas"></canvas>
         <div class="canvas-hint" id="adminHint">Подпишитесь пальцем или мышью</div>
       </div>
       <div class="row2">
-        <button class="btn-s btn-save" onclick="saveSig()">✓ Сохранить подпись</button>
+        <button class="btn-s btn-save" onclick="saveSig()">✓ Сохранить</button>
         <button class="btn-s btn-clear" onclick="clearAdminSig()">✕ Очистить</button>
       </div>
-      <div class="hint" style="margin-top:8px;font-size:10px;color:var(--muted)">Сохраняется в браузере навсегда. Будет автоматически появляться в PDF всех договоров.</div>
+      <div style="margin-top:8px;font-size:10px;color:var(--muted)">Сохраняется навсегда. Появляется в PDF всех договоров автоматически.</div>
     </div>
   </div>
 
-  <!-- ДАННЫЕ КЛИЕНТА -->
   <div class="card">
     <div class="ct">ДАННЫЕ КЛИЕНТА</div>
     <div class="field"><label>ФИО клиента *</label><input type="text" id="f_fio" placeholder="Иванов Иван Иванович" autocomplete="off"></div>
@@ -154,7 +132,6 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 
-  <!-- ПАРАМЕТРЫ КРЕДИТА -->
   <div class="card">
     <div class="ct">ПАРАМЕТРЫ СДЕЛКИ</div>
     <div class="field">
@@ -169,10 +146,13 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
     <div class="g2">
       <div class="field"><label>Сумма кредита ₸ *</label><input type="number" id="f_amt" placeholder="5000000" oninput="calc()"></div>
       <div class="field">
-        <label>Наш % (скрыт от клиента)</label>
+        <label>Наш % (скрыт)</label>
         <select id="f_pct" onchange="calc()">
-          <option value="10">10%</option><option value="9">9%</option>
-          <option value="8">8%</option><option value="7">7%</option><option value="5">5%</option>
+          <option value="10">10%</option>
+          <option value="9">9%</option>
+          <option value="8">8%</option>
+          <option value="7">7%</option>
+          <option value="5">5%</option>
         </select>
       </div>
     </div>
@@ -182,17 +162,15 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 
-  <!-- ТИП ДОГОВОРА -->
   <div class="card">
     <div class="ct">ТИП ДОГОВОРА</div>
     <div class="toggle">
       <button class="topt active" onclick="setDT('pre',this)">📋 Предварительный</button>
       <button class="topt" onclick="setDT('main',this)">✅ Основной</button>
     </div>
-    <div class="type-hint" id="dtHint"><strong>Предварительный</strong> — подписывается ДО получения кредита. Клиент обязуется оплатить после зачисления. Ваша главная защита.</div>
+    <div class="type-hint" id="dtHint"><strong>Предварительный</strong> — подписывается ДО получения кредита. Ваша главная защита.</div>
   </div>
 
-  <!-- ДОПТОНАЛЬНО -->
   <div class="card">
     <div class="ct">ДОПОЛНИТЕЛЬНО</div>
     <div class="g2">
@@ -217,44 +195,19 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 </div>
 
 <script>
-// ---- PIN ----
-const PIN = '2025';
-let pinVal = '';
-function np(d){
-  if(pinVal.length>=4) return;
-  pinVal += d;
-  document.getElementById('pinDots').textContent = '⬤ '.repeat(pinVal.length) + '● '.repeat(4-pinVal.length);
-  if(pinVal.length===4) setTimeout(checkPin, 200);
-}
-function npDel(){
-  pinVal = pinVal.slice(0,-1);
-  document.getElementById('pinDots').textContent = '⬤ '.repeat(pinVal.length) + '● '.repeat(4-pinVal.length);
-}
+const PIN='2025';
+let pinVal='';
+function np(d){if(pinVal.length>=4)return;pinVal+=d;document.getElementById('pinDots').textContent='⬤ '.repeat(pinVal.length)+'● '.repeat(4-pinVal.length);if(pinVal.length===4)setTimeout(checkPin,200);}
+function npDel(){pinVal=pinVal.slice(0,-1);document.getElementById('pinDots').textContent='⬤ '.repeat(pinVal.length)+'● '.repeat(4-pinVal.length);}
 function checkPin(){
-  if(pinVal===PIN){
-    document.getElementById('pinScreen').style.display='none';
-    document.getElementById('main').style.display='block';
-    loadSig();
-  } else {
-    const e=document.getElementById('pinErr');e.style.opacity='1';
-    document.getElementById('pinDots').style.color='#ff4444';
-    setTimeout(()=>{e.style.opacity='0';pinVal='';document.getElementById('pinDots').textContent='● ● ● ●';document.getElementById('pinDots').style.color='var(--green)';},1000);
-  }
+  if(pinVal===PIN){document.getElementById('pinScreen').style.display='none';document.getElementById('main').style.display='block';loadSig();}
+  else{const e=document.getElementById('pinErr');e.style.opacity='1';document.getElementById('pinDots').style.color='#ff4444';setTimeout(()=>{e.style.opacity='0';pinVal='';document.getElementById('pinDots').textContent='● ● ● ●';document.getElementById('pinDots').style.color='var(--green)';},1000);}
 }
 
-// ---- ADMIN SIGNATURE ----
 const aC=document.getElementById('adminCanvas');
 const aCtx=aC.getContext('2d');
-let aDrawing=false, aHasSig=false;
-
-function initAdminCanvas(){
-  const dpr=window.devicePixelRatio||1;
-  aC.width=(aC.offsetWidth||340)*dpr;
-  aC.height=120*dpr;
-  aCtx.scale(dpr,dpr);
-  aCtx.strokeStyle='#00E676';aCtx.lineWidth=2.5;aCtx.lineCap='round';aCtx.lineJoin='round';
-}
-
+let aDrawing=false,aHasSig=false;
+function initAdminCanvas(){const dpr=window.devicePixelRatio||1;aC.width=(aC.offsetWidth||340)*dpr;aC.height=120*dpr;aCtx.scale(dpr,dpr);aCtx.strokeStyle='#00E676';aCtx.lineWidth=2.5;aCtx.lineCap='round';aCtx.lineJoin='round';}
 function getAP(e){const r=aC.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top};}
 aC.addEventListener('mousedown',e=>{aDrawing=true;const p=getAP(e);aCtx.beginPath();aCtx.moveTo(p.x,p.y);});
 aC.addEventListener('mousemove',e=>{if(!aDrawing)return;const p=getAP(e);aCtx.lineTo(p.x,p.y);aCtx.stroke();aHasSig=true;document.getElementById('adminHint').style.opacity='0';});
@@ -262,61 +215,18 @@ aC.addEventListener('mouseup',()=>aDrawing=false);
 aC.addEventListener('touchstart',e=>{e.preventDefault();aDrawing=true;const p=getAP(e);aCtx.beginPath();aCtx.moveTo(p.x,p.y);},{passive:false});
 aC.addEventListener('touchmove',e=>{e.preventDefault();if(!aDrawing)return;const p=getAP(e);aCtx.lineTo(p.x,p.y);aCtx.stroke();aHasSig=true;document.getElementById('adminHint').style.opacity='0';},{passive:false});
 aC.addEventListener('touchend',()=>aDrawing=false);
-
 function clearAdminSig(){aCtx.clearRect(0,0,aC.width,aC.height);aHasSig=false;document.getElementById('adminHint').style.opacity='1';}
+function saveSig(){if(!aHasSig){alert('Сначала поставьте подпись!');return;}const data=aC.toDataURL('image/png');localStorage.setItem('sf_admin_sig',data);showSaved(data);alert('✓ Подпись сохранена!');}
+function loadSig(){setTimeout(()=>{initAdminCanvas();const saved=localStorage.getItem('sf_admin_sig');if(saved)showSaved(saved);},100);}
+function showSaved(data){document.getElementById('sigSavedImg').src=data;document.getElementById('sigSavedWrap').style.display='block';document.getElementById('sigDrawWrap').style.display='none';document.getElementById('sigSavedBox').style.display='block';}
+function changeSig(){document.getElementById('sigSavedWrap').style.display='none';document.getElementById('sigDrawWrap').style.display='block';initAdminCanvas();}
 
-function saveSig(){
-  if(!aHasSig){alert('Сначала поставьте подпись!');return;}
-  const data=aC.toDataURL('image/png');
-  localStorage.setItem('sf_admin_sig',data);
-  showSaved(data);
-  alert('✓ Подпись сохранена! Она будет автоматически появляться в PDF всех договоров.');
-}
-
-function loadSig(){
-  setTimeout(()=>{
-    initAdminCanvas();
-    const saved=localStorage.getItem('sf_admin_sig');
-    if(saved) showSaved(saved);
-  },100);
-}
-
-function showSaved(data){
-  document.getElementById('sigSavedImg').src=data;
-  document.getElementById('sigSavedWrap').style.display='block';
-  document.getElementById('sigDrawWrap').style.display='none';
-  document.getElementById('sigSavedBox').style.display='block';
-}
-
-function changeSig(){
-  document.getElementById('sigSavedWrap').style.display='none';
-  document.getElementById('sigDrawWrap').style.display='block';
-  initAdminCanvas();
-}
-
-// ---- CALC ----
-function calc(){
-  const a=parseFloat(document.getElementById('f_amt').value)||0;
-  const p=parseFloat(document.getElementById('f_pct').value)||10;
-  if(!a){document.getElementById('feeVal').textContent='— ₸';return;}
-  document.getElementById('feeVal').textContent=(Math.round(a*p/100)).toLocaleString('ru-RU')+' ₸';
-}
-
-// ---- IIN MASK ----
+function calc(){const a=parseFloat(document.getElementById('f_amt').value)||0;const p=parseFloat(document.getElementById('f_pct').value)||10;if(!a){document.getElementById('feeVal').textContent='— ₸';return;}document.getElementById('feeVal').textContent=(Math.round(a*p/100)).toLocaleString('ru-RU')+' ₸';}
 document.getElementById('f_iin').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,12);});
 
-// ---- DOC TYPE ----
 let docType='pre';
-function setDT(t,el){
-  docType=t;
-  document.querySelectorAll('.topt').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('dtHint').innerHTML=t==='pre'
-    ?'<strong>Предварительный</strong> — подписывается ДО получения кредита. Клиент обязуется оплатить после зачисления. Ваша главная защита.'
-    :'<strong>Основной</strong> — подписывается после получения кредита. Подтверждает факт оказанных услуг.';
-}
+function setDT(t,el){docType=t;document.querySelectorAll('.topt').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('dtHint').innerHTML=t==='pre'?'<strong>Предварительный</strong> — подписывается ДО получения кредита. Ваша главная защита.':'<strong>Основной</strong> — подписывается после получения кредита.';}
 
-// ---- GENERATE ----
 let generatedLink='';
 function generate(){
   const fio=document.getElementById('f_fio').value.trim();
@@ -333,13 +243,11 @@ function generate(){
   const params=new URLSearchParams();
   params.set('n',btoa(encodeURIComponent(fio)));
   params.set('ph',encodeURIComponent(phone));
-  if(iin) params.set('i',iin);
-  params.set('a',amt);
-  params.set('f',fee);
+  if(iin)params.set('i',iin);
+  params.set('a',amt);params.set('f',fee);
   params.set('t',document.getElementById('f_type').value);
-  if(bank) params.set('b',encodeURIComponent(bank));
-  params.set('doc',docNum);
-  params.set('dt',docType);
+  if(bank)params.set('b',encodeURIComponent(bank));
+  params.set('doc',docNum);params.set('dt',docType);
   params.set('d',now.toISOString().split('T')[0]);
   const base=location.origin+location.pathname.replace('admin.html','')+'dogovor.html';
   generatedLink=base+'?'+params.toString();
@@ -349,32 +257,10 @@ function generate(){
   document.getElementById('result').style.display='block';
   document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
+function copyL(){navigator.clipboard.writeText(generatedLink).then(()=>{const b=document.getElementById('copyBtn');b.textContent='✓ Скопировано';b.classList.add('ok');setTimeout(()=>{b.textContent='📋 Копировать';b.classList.remove('ok');},2000);});}
+function sendWA(){const fio=document.getElementById('f_fio').value.trim();const firstName=fio.split(' ')[1]||fio;const phone=document.getElementById('f_phone').value.replace(/\D/g,'');const waPhone=phone.startsWith('7')?phone:'7'+phone;const msg='SUNKAR FINANCE\n\nДобрый день, '+firstName+'!\n\nПожалуйста, ознакомьтесь с документами и подпишите их по ссылке:\n\n'+generatedLink+'\n\nЭто займёт 3 минуты 📝';window.open('https://wa.me/'+waPhone+'?text='+encodeURIComponent(msg),'_blank');}
 
-function copyL(){
-  navigator.clipboard.writeText(generatedLink).then(()=>{
-    const b=document.getElementById('copyBtn');b.textContent='✓ Скопировано';b.classList.add('ok');
-    setTimeout(()=>{b.textContent='📋 Копировать';b.classList.remove('ok');},2000);
-  });
-}
-
-function sendWA(){
-  const fio=document.getElementById('f_fio').value.trim();
-  const firstName=fio.split(' ')[1]||fio;
-  const phone=document.getElementById('f_phone').value.replace(/\D/g,'');
-  const waPhone=phone.startsWith('7')?phone:'7'+phone;
-  const msg='SUNKAR FINANCE
-
-Добрый день, '+firstName+'!
-
-Пожалуйста, ознакомьтесь с документами и подпишите их по ссылке:
-
-'+generatedLink+'
-
-Это займёт 3 минуты 📝';
-  window.open('https://wa.me/'+waPhone+'?text='+encodeURIComponent(msg),'_blank');
-}
-
-window.addEventListener('load',()=>{ if(document.getElementById('main').style.display==='block') loadSig(); });
+window.addEventListener('load',()=>{if(document.getElementById('main').style.display==='block')loadSig();});
 </script>
 </body>
 </html>
