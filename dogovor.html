@@ -342,7 +342,7 @@ function setLang(l){
   ['RS1','RS2','RS3'].forEach(id=>{const el=document.getElementById(id);if(el&&!el.classList.contains('done'))el.textContent=t.scroll;});
   document.getElementById('I_type').textContent=ctype();
   const sn=document.getElementById('L_signNote');
-  if(sn)sn.innerHTML=t.signNote+' <span>'+(l==='kz'?'шарт, келісім және акт':'договора, согласия и акта')+'</span>';
+  if(sn)sn.innerHTML=t.signNote+' <span>'+(lang==='kz'?'шарт, келісім және акт':'договора, согласия и акта')+'</span>';
   const fl=document.getElementById('L_foot');
   if(fl)fl.innerHTML=t.foot.replace('\n','<br>');
   buildAll();
@@ -492,6 +492,36 @@ function submitSign(){
   signedTime=now.toLocaleString('ru-RU',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
   signedCode='SF-'+docNum+'-'+Math.random().toString(36).substring(2,6).toUpperCase();
   const ct=ctype();
+
+  // ======= СОХРАНЕНИЕ В LOCALSTORAGE =======
+  const record = {
+    docNum: docNum,
+    docDate: docDate,
+    docType: docType,
+    signedTime: signedTime,
+    signedCode: signedCode,
+    name: cName,
+    phone: cPhone,
+    iin: cIin,
+    amt: cAmt,
+    fee: cFee,
+    typeIdx: cTIdx,
+    typeName: ct,
+    bank: cBank,
+    clientSig: clientSigData
+  };
+  let contracts = [];
+  try {
+    contracts = JSON.parse(localStorage.getItem('sf_contracts') || '[]');
+  } catch(e){}
+  // Проверим, нет ли уже такого договора (по номеру)
+  const exists = contracts.some(c => c.docNum === docNum && c.iin === cIin);
+  if (!exists) {
+    contracts.unshift(record); // в начало
+    localStorage.setItem('sf_contracts', JSON.stringify(contracts));
+  }
+  // ======= КОНЕЦ СОХРАНЕНИЯ =======
+
   // Build receipt
   document.getElementById('RCPT_num').textContent='№ '+docNum+' · '+signedTime;
   document.getElementById('RCPT_code').textContent=signedCode;
@@ -511,8 +541,6 @@ function submitSign(){
 }
 
 // PRINT PDF
-
-
 function generatePDF(){
   const btn = document.getElementById('L_pdfBtn');
   btn.textContent = '⏳ Генерируется PDF...';
@@ -522,7 +550,6 @@ function generatePDF(){
   const ct = ctype();
   const adminSig = localStorage.getItem('sf_admin_sig')||'';
 
-  // Build print-ready HTML pages
   const sigBlockHTML = (title, name, info, sigImg) => `
     <div style="flex:1">
       <div style="font-size:8pt;font-weight:bold;color:#005c2e;text-transform:uppercase;margin-bottom:5px">${title}</div>
