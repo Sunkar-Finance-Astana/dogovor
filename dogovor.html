@@ -3,468 +3,679 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SUNKAR FINANCE — Подпишите договор</title>
-
-<!-- FAVICON -->
+<title>SUNKAR FINANCE — Подпишите документы</title>
 <link rel="icon" type="image/png" href="https://sunkar-finance-astana.github.io/KZ/img/logo.png">
-<link rel="apple-touch-icon" href="https://sunkar-finance-astana.github.io/KZ/img/logo.png">
-
-<!-- OG — превью при отправке в WhatsApp/Telegram -->
-<meta property="og:title" content="Подпишите договор — SUNKAR FINANCE">
-<meta property="og:description" content="Ознакомьтесь с условиями и подпишите договор на оказание услуг. Это займёт 2 минуты.">
+<meta property="og:title" content="Подпишите документы — SUNKAR FINANCE">
+<meta property="og:description" content="Договор, согласие и акт. Займёт 3 минуты.">
 <meta property="og:image" content="https://sunkar-finance-astana.github.io/KZ/img/og-main.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ru_RU">
 <meta name="theme-color" content="#060D1F">
-
-<!-- Twitter/Telegram card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Подпишите договор — SUNKAR FINANCE">
-<meta name="twitter:description" content="Ознакомьтесь с условиями и подпишите договор на оказание услуг.">
-<meta name="twitter:image" content="https://sunkar-finance-astana.github.io/KZ/img/og-main.jpg">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--bg:#060D1F;--card:#0F1D38;--green:#00E676;--blue:#2979FF;--text:#E8EFF8;--muted:#7A8FA6;--border:rgba(0,230,118,0.15)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow-x:hidden}
+html,body{min-height:100%;overflow-x:hidden}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 10% 10%,rgba(0,230,118,0.05) 0%,transparent 50%),radial-gradient(ellipse at 90% 90%,rgba(41,121,255,0.05) 0%,transparent 50%);pointer-events:none;z-index:0}
 
-/* PROGRESS BAR */
+/* PROGRESS */
 .progress-bar{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.05);z-index:100}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));transition:width 0.4s ease;width:25%}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));transition:width 0.4s;width:16%}
 
-/* SCREEN SYSTEM */
+/* LANG */
+.lang-bar{position:fixed;top:6px;right:12px;z-index:101;display:flex;gap:4px}
+.lang-btn{padding:5px 10px;border-radius:20px;font-size:10px;font-weight:700;font-family:'Unbounded',sans-serif;border:1px solid var(--border);background:rgba(6,13,31,0.92);color:var(--muted);cursor:pointer;letter-spacing:0.05em;transition:all 0.2s}
+.lang-btn.active{background:rgba(0,230,118,0.12);border-color:var(--green);color:var(--green)}
+
+/* DOC TABS */
+.doc-tabs{display:flex;gap:6px;padding:0 16px;margin-bottom:14px;overflow-x:auto}
+.doc-tab{flex-shrink:0;padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700;border:1px solid var(--border);background:var(--card);color:var(--muted);letter-spacing:0.05em;text-transform:uppercase}
+.doc-tab.active{border-color:var(--green);color:var(--green);background:rgba(0,230,118,0.08)}
+.doc-tab.done{border-color:var(--blue);color:var(--blue);background:rgba(41,121,255,0.06)}
+
+/* SCREENS */
 .screen{display:none;position:relative;z-index:1;padding:0 0 40px;min-height:100vh}
 .screen.active{display:block}
 
-/* ===== SCREEN 1: INTRO ===== */
-#s1{padding:0}
-.hero{background:linear-gradient(180deg,#0A1A0A 0%,var(--bg) 100%);padding:40px 20px 32px;text-align:center;border-bottom:1px solid var(--border)}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.25);border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
+/* HERO */
+.hero{background:linear-gradient(180deg,#071A07 0%,var(--bg) 100%);padding:42px 20px 26px;text-align:center;border-bottom:1px solid var(--border)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.25);border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px}
 .hero-badge::before{content:'●';font-size:7px;animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.hero-logo{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-.hero-title{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700;color:var(--muted);letter-spacing:0.05em}
+.hero-sub{font-size:11px;color:var(--muted);margin-top:6px}
 
-.intro-pad{padding:20px}
-.welcome-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:14px}
-.wc-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
-.wc-name{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.pad{padding:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px}
+.card-lbl{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.card-val{font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.amt-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+.amt-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.amt-val{font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700}
+.amt-card.fee{border-color:rgba(41,121,255,0.25);background:rgba(41,121,255,0.05)}
+.amt-card.fee .amt-val{color:var(--blue)}
+.type-row{background:rgba(0,230,118,0.05);border:1px solid rgba(0,230,118,0.12);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.7}
+.type-row strong{color:var(--green)}
+.pre-warn{background:rgba(255,200,0,0.05);border:1px solid rgba(255,200,0,0.2);border-radius:10px;padding:12px 14px;font-size:12px;color:#FFD54F;margin-bottom:12px;line-height:1.7}
+.pre-warn b{display:block;font-size:13px;margin-bottom:3px}
+.steps{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:20px}
+.si{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.si:last-child{border:none}
+.sn{width:24px;height:24px;border-radius:50%;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--green);font-family:'Unbounded',sans-serif;flex-shrink:0}
+.st{font-size:12px;color:var(--muted)}
 
-.amounts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.amount-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-.ac-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
-.ac-val{font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;color:var(--text)}
-.amount-card.fee-card{border-color:rgba(41,121,255,0.25);background:rgba(41,121,255,0.06)}
-.amount-card.fee-card .ac-val{color:var(--blue)}
+/* CONTRACT BOX */
+.sh{font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;color:var(--green);margin-bottom:12px;display:flex;align-items:center;gap:8px;letter-spacing:0.05em;padding:20px 20px 0}
+.sh::before{content:'';width:3px;height:14px;background:linear-gradient(var(--green),var(--blue));border-radius:2px}
+.rp{height:2px;background:rgba(255,255,255,0.05);border-radius:2px;margin-bottom:8px}
+.rf{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:2px;width:0%;transition:width 0.2s}
+.rs{text-align:center;font-size:11px;color:var(--muted);margin-bottom:12px}
+.rs.done{color:var(--green)}
+.cbox{background:#070E20;border:1px solid rgba(255,255,255,0.06);border-radius:12px;height:360px;overflow-y:auto;padding:18px}
+.cbox::-webkit-scrollbar{width:3px}
+.cbox::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+.ct{font-family:'Unbounded',sans-serif;font-size:11.5px;font-weight:700;color:var(--green);margin:16px 0 7px;letter-spacing:0.04em}
+.ct:first-child{margin-top:0}
+.cp{font-size:12px;line-height:1.75;color:#B0BEC5;margin-bottom:7px}
+.cp strong{color:var(--text)}
+.ci{font-size:12px;line-height:1.7;color:#B0BEC5;padding-left:14px;position:relative;margin-bottom:5px}
+.ci::before{content:'—';position:absolute;left:0;color:var(--green)}
+.ch{background:rgba(0,230,118,0.05);border-left:2px solid var(--green);padding:9px 11px;border-radius:0 5px 5px 0;margin:9px 0;font-size:12px;color:var(--text)}
+.agree{display:flex;align-items:flex-start;gap:12px;background:rgba(0,230,118,0.04);border:1px solid rgba(0,230,118,0.12);border-radius:10px;padding:12px;cursor:pointer;margin:12px 0}
+.agree input[type=checkbox]{width:20px;height:20px;accent-color:var(--green);flex-shrink:0;margin-top:2px}
+.agree span{font-size:12px;line-height:1.6;color:var(--text)}
 
-.type-badge{background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6}
-.type-badge strong{color:var(--green)}
-
-.pre-notice{background:rgba(255,180,0,0.06);border:1px solid rgba(255,180,0,0.2);border-radius:10px;padding:14px;margin-bottom:14px;font-size:12px;line-height:1.7;color:#FFD54F}
-.pre-notice .notice-title{font-weight:700;font-size:13px;margin-bottom:4px}
-
-.steps-list{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:20px}
-.step-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.step-item:last-child{border-bottom:none}
-.step-num{width:28px;height:28px;border-radius:50%;background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green);font-family:'Unbounded',sans-serif;flex-shrink:0}
-.step-text{font-size:12px;color:var(--muted)}
-
-/* ===== SCREEN 2: CONTRACT ===== */
-#s2{padding:20px}
-.section-header{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.section-header::before{content:'';width:3px;height:16px;background:linear-gradient(var(--green),var(--blue));border-radius:2px}
-
-.contract-box{background:#070E20;border:1px solid rgba(255,255,255,0.06);border-radius:14px;height:380px;overflow-y:auto;padding:20px;margin-bottom:12px}
-.contract-box::-webkit-scrollbar{width:3px}
-.contract-box::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
-.contract-box::-webkit-scrollbar-track{background:transparent}
-
-.c-title{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;color:var(--green);margin:18px 0 8px;letter-spacing:0.04em}
-.c-title:first-child{margin-top:0}
-.c-p{font-size:12.5px;line-height:1.75;color:#B0BEC5;margin-bottom:9px}
-.c-p strong{color:var(--text)}
-.c-item{font-size:12.5px;line-height:1.7;color:#B0BEC5;padding-left:16px;position:relative;margin-bottom:6px}
-.c-item::before{content:'—';position:absolute;left:0;color:var(--green)}
-.c-hl{background:rgba(0,230,118,0.05);border-left:2px solid var(--green);padding:10px 12px;border-radius:0 6px 6px 0;margin:10px 0;font-size:12.5px;color:var(--text)}
-
-.read-progress{height:2px;background:rgba(255,255,255,0.05);border-radius:2px;margin-bottom:12px}
-.read-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:2px;width:0%;transition:width 0.2s}
-.read-status{text-align:center;font-size:11px;color:var(--muted);margin-bottom:16px;transition:all 0.3s}
-.read-status.done{color:var(--green)}
-
-.agree-label{display:flex;align-items:flex-start;gap:12px;background:rgba(0,230,118,0.04);border:1px solid rgba(0,230,118,0.12);border-radius:12px;padding:14px;cursor:pointer}
-.agree-label input[type=checkbox]{width:20px;height:20px;accent-color:var(--green);flex-shrink:0;margin-top:2px}
-.agree-text{font-size:12px;line-height:1.6;color:var(--text)}
-
-/* ===== SCREEN 3: SIGN ===== */
-#s3{padding:20px}
-.field{margin-bottom:14px}
+/* SIGN */
+.field{margin-bottom:13px}
 .field label{display:block;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
-.field input{width:100%;background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:13px 14px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
-.field input:focus{border-color:var(--green);box-shadow:0 0 15px rgba(0,230,118,0.1)}
-.field .hint{font-size:11px;color:var(--muted);margin-top:5px}
+.field input{width:100%;background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
+.field input:focus{border-color:var(--green);box-shadow:0 0 12px rgba(0,230,118,0.1)}
 .field input.err{border-color:#ff5555}
+.field .hint{font-size:11px;color:var(--muted);margin-top:5px}
+.sig-area{background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;position:relative;margin-bottom:7px}
+#sigCanvas{display:block;width:100%;height:140px;cursor:crosshair;touch-action:none}
+.ch2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;color:var(--muted);pointer-events:none;text-align:center;line-height:1.5}
+.sig-clr{width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:8px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:12px}
+.consent-note{background:rgba(41,121,255,0.05);border:1px solid rgba(41,121,255,0.12);border-radius:9px;padding:11px 13px;font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:12px}
+.docs-sign-note{background:rgba(0,230,118,0.04);border:1px solid rgba(0,230,118,0.12);border-radius:9px;padding:11px 13px;font-size:11.5px;color:var(--text);line-height:1.7;margin-bottom:12px}
+.docs-sign-note span{color:var(--green);font-weight:600}
 
-.sig-area{background:#070E20;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;position:relative;margin-bottom:8px}
-#sigCanvas{display:block;width:100%;height:150px;cursor:crosshair;touch-action:none}
-.canvas-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;color:var(--muted);pointer-events:none;transition:opacity 0.3s;text-align:center;line-height:1.5}
-.sig-clear{width:100%;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);border-radius:8px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;margin-bottom:14px}
-.sig-clear:hover{border-color:#ff5555;color:#ff5555}
+/* SUCCESS */
+#s5{padding:20px;text-align:center}
+.sico{width:76px;height:76px;background:linear-gradient(135deg,var(--green),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:26px auto 16px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(0,230,118,0.3)}50%{box-shadow:0 0 45px rgba(0,230,118,0.6)}}
+.stit{font-family:'Unbounded',sans-serif;font-size:19px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:7px}
+.ssub{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.rcpt{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:left;margin-bottom:14px}
+.rr{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;gap:10px}
+.rr:last-child{border:none}
+.rl{color:var(--muted);flex-shrink:0}
+.rv{color:var(--text);font-weight:500;text-align:right}
+.rcode{background:#070E20;border-radius:7px;padding:9px;text-align:center;margin-top:9px;font-family:monospace;font-size:10px;color:var(--muted);word-break:break-all}
+.rcode strong{color:var(--green);display:block;font-size:13px;letter-spacing:0.08em;margin-bottom:2px}
+.btn-pdf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border-radius:12px;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:900;border:none;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;text-transform:uppercase;box-shadow:0 0 20px rgba(0,230,118,0.25)}
+.btn-pdf:active{transform:scale(0.98)}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:12px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;border:none;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;text-decoration:none}
 
-.consent-box{background:rgba(41,121,255,0.05);border:1px solid rgba(41,121,255,0.15);border-radius:10px;padding:12px 14px;font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:14px}
-
-/* ===== SCREEN 4: SUCCESS ===== */
-#s4{padding:20px;text-align:center}
-.success-icon{width:80px;height:80px;background:linear-gradient(135deg,var(--green),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:30px auto 20px;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 20px rgba(0,230,118,0.3)}50%{box-shadow:0 0 50px rgba(0,230,118,0.6)}}
-.success-title{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
-.success-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px}
-
-.receipt{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:left;margin-bottom:16px}
-.receipt-row{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12.5px;gap:10px}
-.receipt-row:last-child{border-bottom:none}
-.r-lbl{color:var(--muted);flex-shrink:0}
-.r-val{color:var(--text);font-weight:500;text-align:right}
-.receipt-code{background:#070E20;border-radius:8px;padding:10px;text-align:center;margin-top:10px;font-family:monospace;font-size:11px;color:var(--muted);word-break:break-all}
-.receipt-code strong{color:var(--green);display:block;font-size:13px;margin-bottom:2px}
-
-.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:12px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;border:none;cursor:pointer;letter-spacing:0.05em;margin-bottom:10px;text-decoration:none}
-
-/* BOTTOM BUTTON */
-.bottom-btn{position:sticky;bottom:0;padding:12px 20px 20px;background:linear-gradient(0deg,var(--bg) 70%,transparent);margin:-1px -20px 0;margin-top:20px}
-.next-btn{width:100%;padding:16px;border-radius:12px;font-size:13px;font-weight:900;font-family:'Unbounded',sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 25px rgba(0,230,118,0.25);transition:all 0.2s;text-transform:uppercase}
-.next-btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
-.next-btn:active:not(:disabled){transform:scale(0.98)}
+/* BOTTOM */
+.bot{position:sticky;bottom:0;padding:10px 20px 18px;background:linear-gradient(0deg,var(--bg) 70%,transparent);margin:18px -20px 0;padding-left:20px;padding-right:20px}
+.nxt{width:100%;padding:15px;border-radius:12px;font-size:12px;font-weight:900;font-family:'Unbounded',sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 22px rgba(0,230,118,0.25);transition:all 0.2s;text-transform:uppercase}
+.nxt:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
+.nxt:active:not(:disabled){transform:scale(0.98)}
 </style>
 </head>
 <body>
 
-<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-bar"><div class="progress-fill" id="PF"></div></div>
+<div class="lang-bar">
+  <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">РУС</button>
+  <button class="lang-btn" id="btnKz" onclick="setLang('kz')">ҚАЗ</button>
+</div>
 
-<!-- ===== SCREEN 1: INTRO ===== -->
+<!-- S1: INTRO -->
 <div class="screen active" id="s1">
   <div class="hero">
-    <div class="hero-badge">Электронный договор</div>
-    <img src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE" style="height:52px;width:auto;margin:0 auto 10px;display:block;filter:brightness(1.05)">
-    <div class="hero-title">Финансовый консалтинг · Астана</div>
+    <div class="hero-badge" id="L_badge">Электронные документы</div>
+    <img src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE" style="height:48px;width:auto;display:block;margin:0 auto 7px;filter:drop-shadow(0 0 18px rgba(0,230,118,0.4))">
+    <div class="hero-sub" id="L_sub">Финансовый консалтинг · Астана</div>
   </div>
-  <div class="intro-pad">
-
-    <div class="welcome-card">
-      <div class="wc-label">Договор подготовлен для</div>
-      <div class="wc-name" id="i_name">—</div>
+  <div class="pad">
+    <div class="card"><div class="card-lbl" id="L_for">Документы подготовлены для</div><div class="card-val" id="I_name">—</div></div>
+    <div class="g2">
+      <div class="amt-card"><div class="amt-lbl" id="L_csum">Сумма кредита</div><div class="amt-val" id="I_amt">—</div></div>
+      <div class="amt-card fee"><div class="amt-lbl" id="L_fee">Вознаграждение</div><div class="amt-val" id="I_fee">—</div></div>
     </div>
-
-    <div class="amounts-grid">
-      <div class="amount-card">
-        <div class="ac-lbl">Сумма кредита</div>
-        <div class="ac-val" id="i_amount">—</div>
-      </div>
-      <div class="amount-card fee-card">
-        <div class="ac-lbl">Наше вознаграждение</div>
-        <div class="ac-val" id="i_fee">—</div>
-      </div>
+    <div class="type-row"><span id="L_srv">Услуга:</span> <strong id="I_type">—</strong><br><span id="I_bwrap" style="display:none"><span id="L_bank">Банк:</span> <strong id="I_bank">—</strong><br></span><span id="L_pay">Оплата:</span> <strong id="L_after">только после получения кредита</strong></div>
+    <div class="pre-warn" id="preWarn" style="display:none"><b id="L_imp">⚠️ Важно</b><span id="L_preT">Документы подписываются до получения кредита. Обязательство по оплате возникает после зачисления средств — в течение 3 рабочих дней.</span></div>
+    <div class="steps">
+      <div class="si"><div class="sn">1</div><div class="st" id="L_s1">Читаете и принимаете договор</div></div>
+      <div class="si"><div class="sn">2</div><div class="st" id="L_s2">Читаете и принимаете согласие на обработку данных</div></div>
+      <div class="si"><div class="sn">3</div><div class="st" id="L_s3">Ставите одну подпись для всех документов</div></div>
+      <div class="si"><div class="sn">4</div><div class="st" id="L_s4">Скачиваете PDF со своей подписью</div></div>
     </div>
-
-    <div class="type-badge">
-      Услуга: <strong id="i_type">—</strong><br>
-      <span id="i_bank_wrap" style="display:none">Банк: <strong id="i_bank">—</strong><br></span>
-      Выплата вознаграждения: <strong>только после получения кредита</strong>
-    </div>
-
-    <div class="pre-notice" id="preNotice" style="display:none">
-      <div class="notice-title">⚠️ Важно</div>
-      Настоящий договор подписывается до получения кредитных средств. Он фиксирует ваше обязательство оплатить услугу в течение 3 рабочих дней после зачисления кредита на ваш счёт.
-    </div>
-
-    <div class="steps-list">
-      <div class="step-item"><div class="step-num">1</div><div class="step-text">Читаете условия договора</div></div>
-      <div class="step-item"><div class="step-num">2</div><div class="step-text">Указываете ваш ИИН</div></div>
-      <div class="step-item"><div class="step-num">3</div><div class="step-text">Ставите электронную подпись</div></div>
-      <div class="step-item"><div class="step-num">4</div><div class="step-text">Получаете подтверждение</div></div>
-    </div>
-
-    <div class="bottom-btn">
-      <button class="next-btn" onclick="go(2)">Читать договор →</button>
-    </div>
+    <div class="bot"><button class="nxt" onclick="go(2)" id="L_startBtn">Начать подписание →</button></div>
   </div>
 </div>
 
-<!-- ===== SCREEN 2: CONTRACT ===== -->
+<!-- S2: CONTRACT -->
 <div class="screen" id="s2">
-  <div class="section-header" style="padding:20px 20px 0">ТЕКСТ ДОГОВОРА</div>
+  <div class="sh" id="L_cTitle">ДОГОВОР</div>
   <div style="padding:0 20px">
-
-    <div class="read-progress"><div class="read-fill" id="readFill"></div></div>
-    <div class="read-status" id="readStatus">↓ Прокрутите до конца, чтобы продолжить</div>
-
-    <div class="contract-box" id="contractBox"></div>
-
-    <div class="agree-label" id="agreeWrap" style="opacity:0.4;pointer-events:none;margin:14px 0">
-      <input type="checkbox" id="agreeChk" onchange="checkAgree()">
-      <span class="agree-text">Я ознакомился(лась) с условиями договора, понимаю и принимаю их. Подтверждаю достоверность своих данных.</span>
+    <div class="doc-tabs">
+      <div class="doc-tab active" id="tab1">📄 <span id="L_tab1">Договор</span></div>
+      <div class="doc-tab" id="tab2">🔒 <span id="L_tab2">Согласие</span></div>
+      <div class="doc-tab" id="tab3">✅ <span id="L_tab3">Акт</span></div>
     </div>
-
-    <div class="bottom-btn">
-      <button class="next-btn" id="nextBtn2" disabled onclick="go(3)">Перейти к подписанию →</button>
+    <div class="rp"><div class="rf" id="RF1"></div></div>
+    <div class="rs" id="RS1">↓ Прокрутите до конца</div>
+    <div class="cbox" id="CB1"></div>
+    <div class="agree" id="AG1" style="opacity:0.35;pointer-events:none">
+      <input type="checkbox" id="CHK1" onchange="chk(1)">
+      <span id="L_agree1">Я прочитал(а) и принимаю условия договора.</span>
     </div>
+    <div class="bot"><button class="nxt" id="NXT1" disabled onclick="go(3)" id="L_toConsent">Далее: Согласие →</button></div>
   </div>
 </div>
 
-<!-- ===== SCREEN 3: SIGN ===== -->
+<!-- S3: CONSENT -->
 <div class="screen" id="s3">
-  <div style="padding:20px">
-    <div class="section-header">ВАШИ ДАННЫЕ И ПОДПИСЬ</div>
-
-    <div class="field">
-      <label>ФИО (проверьте)</label>
-      <input type="text" id="s_fio" readonly>
+  <div class="sh" id="L_conTitle">СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ</div>
+  <div style="padding:0 20px">
+    <div class="doc-tabs">
+      <div class="doc-tab done" id="tab1b">📄 <span id="L_tab1b">Договор</span> ✓</div>
+      <div class="doc-tab active" id="tab2b">🔒 <span id="L_tab2b">Согласие</span></div>
+      <div class="doc-tab" id="tab3b">✅ <span id="L_tab3b">Акт</span></div>
     </div>
-    <div class="field">
-      <label>Номер телефона</label>
-      <input type="tel" id="s_phone">
+    <div class="rp"><div class="rf" id="RF2"></div></div>
+    <div class="rs" id="RS2">↓ Прокрутите до конца</div>
+    <div class="cbox" id="CB2"></div>
+    <div class="agree" id="AG2" style="opacity:0.35;pointer-events:none">
+      <input type="checkbox" id="CHK2" onchange="chk(2)">
+      <span id="L_agree2">Я даю согласие на сбор и обработку моих персональных данных.</span>
     </div>
-    <div class="field">
-      <label>ИИН *</label>
-      <input type="text" id="s_iin" placeholder="000000000000" maxlength="12" oninput="this.value=this.value.replace(/\D/g,'').substring(0,12)">
-      <div class="hint">Индивидуальный идентификационный номер — 12 цифр</div>
-    </div>
-
-    <div class="field">
-      <label>Электронная подпись</label>
-      <div class="sig-area">
-        <canvas id="sigCanvas"></canvas>
-        <div class="canvas-hint" id="canvasHint">Подпишитесь пальцем<br>или мышью</div>
-      </div>
-      <button class="sig-clear" onclick="clearSig()">✕ Очистить подпись</button>
-    </div>
-
-    <div class="consent-box">
-      Нажимая «Подписать», вы даёте согласие на обработку персональных данных согласно Закону РК №94-V от 21.05.2013. Данные используются исключительно в целях оказания услуг по настоящему договору.
-    </div>
-
-    <div class="bottom-btn">
-      <button class="next-btn" onclick="submitSign()">✓ ПОДПИСАТЬ ДОГОВОР</button>
-    </div>
+    <div class="bot"><button class="nxt" id="NXT2" disabled onclick="go(4)" id="L_toAct">Далее: Акт →</button></div>
   </div>
 </div>
 
-<!-- ===== SCREEN 4: SUCCESS ===== -->
+<!-- S4: ACT -->
 <div class="screen" id="s4">
-  <div class="success-icon">✓</div>
-  <div class="success-title">ПОДПИСАНО</div>
-  <p class="success-sub">Договор подписан. Менеджер SUNKAR FINANCE свяжется с вами для уточнения деталей.</p>
+  <div class="sh" id="L_actTitle">АКТ ВЫПОЛНЕННЫХ РАБОТ</div>
+  <div style="padding:0 20px">
+    <div class="doc-tabs">
+      <div class="doc-tab done">📄 <span id="L_tab1c">Договор</span> ✓</div>
+      <div class="doc-tab done">🔒 <span id="L_tab2c">Согласие</span> ✓</div>
+      <div class="doc-tab active">✅ <span id="L_tab3c">Акт</span></div>
+    </div>
+    <div class="rp"><div class="rf" id="RF3"></div></div>
+    <div class="rs" id="RS3">↓ Прокрутите до конца</div>
+    <div class="cbox" id="CB3"></div>
+    <div class="agree" id="AG3" style="opacity:0.35;pointer-events:none">
+      <input type="checkbox" id="CHK3" onchange="chk(3)">
+      <span id="L_agree3">Я ознакомился(лась) с актом выполненных работ и подтверждаю условия.</span>
+    </div>
+    <div class="bot"><button class="nxt" id="NXT3" disabled onclick="go(5)" id="L_toSign">Перейти к подписанию →</button></div>
+  </div>
+</div>
 
-  <div class="receipt" id="receiptBlock"></div>
+<!-- S5: SIGN -->
+<div class="screen" id="s5">
+  <div style="padding:20px">
+    <div class="sh" style="padding:0 0 14px" id="L_sigTitle">ПОДПИСЬ</div>
+    <div class="docs-sign-note" id="L_signNote">Одна подпись применяется ко всем документам: <span>договору, согласию и акту</span></div>
+    <div class="field"><label id="L_fio">ФИО</label><input type="text" id="F_fio" readonly></div>
+    <div class="field"><label id="L_phone">Телефон *</label><input type="tel" id="F_phone"></div>
+    <div class="field">
+      <label id="L_iin">ИИН *</label>
+      <input type="text" id="F_iin" placeholder="000000000000" maxlength="12" oninput="this.value=this.value.replace(/\D/g,'').substring(0,12)">
+      <div class="hint" id="L_iinH">12 цифр — индивидуальный идентификационный номер</div>
+    </div>
+    <div class="field">
+      <label id="L_sig">Электронная подпись</label>
+      <div class="sig-area"><canvas id="sigCanvas"></canvas><div class="ch2" id="CH2">Подпишитесь пальцем или мышью</div></div>
+      <button class="sig-clr" id="L_clr" onclick="clearSig()">✕ Очистить</button>
+    </div>
+    <div class="consent-note" id="L_conNote">Нажимая «Подписать», вы подписываете все 3 документа одновременно. Согласие на обработку данных — согласно Закону РК №94-V от 21.05.2013.</div>
+    <div class="bot"><button class="nxt" id="L_signBtn" onclick="submitSign()">✓ ПОДПИСАТЬ ВСЕ ДОКУМЕНТЫ</button></div>
+  </div>
+</div>
 
-  <a class="wa-btn" id="contactWA" href="#" target="_blank">
-    💬 Написать менеджеру в WhatsApp
-  </a>
-
-  <p style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6">
-    Сохраните этот экран как подтверждение.<br>
-    SUNKAR FINANCE · г. Астана, пр. Абая 18, БЦ Шахар
-  </p>
+<!-- S6: SUCCESS -->
+<div class="screen" id="s6">
+  <div class="sico">✓</div>
+  <div class="stit" id="L_done">ПОДПИСАНО</div>
+  <p class="ssub" id="L_doneSub">Все документы подписаны. Менеджер SUNKAR FINANCE свяжется с вами.</p>
+  <div class="rcpt" id="RCPT"></div>
+  <button class="btn-pdf" onclick="generatePDF()" id="L_pdfBtn">⬇ Скачать PDF все документы</button>
+  <a class="btn-wa" id="WA_link" href="#" target="_blank">💬 <span id="L_waBtn">Написать менеджеру в WhatsApp</span></a>
+  <p style="font-size:11px;color:var(--muted);text-align:center;line-height:1.6;margin-top:6px" id="L_foot">Сохраните этот экран как подтверждение<br>SUNKAR FINANCE · г. Астана, пр. Абая 18, БЦ Шахар</p>
 </div>
 
 <script>
-// ============ PARSE PARAMS ============
+// ========== PARAMS ==========
 const P = Object.fromEntries(new URLSearchParams(location.search));
-const TYPES = ['Беззалоговый потребительский кредит','Кредит под залог недвижимости','Кредит для ИП/ТОО','Ипотечный кредит'];
+const TYPES_RU=['Беззалоговый потребительский кредит','Кредит под залог недвижимости','Кредит для ИП/ТОО','Ипотечный кредит'];
+const TYPES_KZ=['Кепілсіз тұтынушылық несие','Жылжымайтын мүлік кепілімен несие','ЖК/ЖШС үшін несие','Ипотекалық несие'];
+let cName='',cPhone='',cIin='',cAmt=0,cFee=0,cTypeIdx=0,cBank='',docNum='',docDate='',docType='pre';
+let lang='ru', hasSig=false, signedCode='', signedTime='';
 
-let clientName = '', clientPhone = '', clientIin = '', creditAmount = 0, feeAmount = 0, creditType = '', bankName = '', docNum = '', docDate = '', docType = 'pre';
+function fmt(n){return n.toLocaleString('ru-RU');}
+function fmtD(d){try{return new Date(d+'T12:00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});}catch(e){return d;}}
 
-function initParams(){
-  try{ clientName = decodeURIComponent(atob(P.n||'')); }catch(e){ clientName = 'Клиент'; }
-  clientPhone = decodeURIComponent(P.ph||'');
-  clientIin = P.i||'';
-  creditAmount = parseFloat(P.a)||0;
-  feeAmount = parseFloat(P.f)||0;
-  creditType = TYPES[parseInt(P.t)||0]||TYPES[0];
-  bankName = decodeURIComponent(P.b||'');
-  docNum = P.doc||('SF-'+new Date().getFullYear()+'-0000');
-  docDate = P.d||new Date().toISOString().split('T')[0];
-  docType = P.dt||'pre';
+function init(){
+  try{cName=decodeURIComponent(atob(P.n||''));}catch(e){cName='Клиент';}
+  cPhone=decodeURIComponent(P.ph||'');
+  cIin=P.i||'';
+  cAmt=parseFloat(P.a)||0;
+  cFee=parseFloat(P.f)||0;
+  cTypeIdx=parseInt(P.t)||0;
+  cBank=decodeURIComponent(P.b||'');
+  docNum=P.doc||('SF-'+new Date().getFullYear()+'-'+Math.floor(Math.random()*9000+1000));
+  docDate=P.d||new Date().toISOString().split('T')[0];
+  docType=P.dt||'pre';
+
+  document.getElementById('I_name').textContent=cName;
+  document.getElementById('I_amt').textContent=cAmt?fmt(cAmt)+' ₸':'—';
+  document.getElementById('I_fee').textContent=cFee?fmt(cFee)+' ₸':'—';
+  document.getElementById('I_type').textContent=TYPES_RU[cTypeIdx];
+  if(cBank){document.getElementById('I_bank').textContent=cBank;document.getElementById('I_bwrap').style.display='';}
+  if(docType==='pre') document.getElementById('preWarn').style.display='block';
+  document.getElementById('F_fio').value=cName;
+  document.getElementById('F_phone').value=cPhone;
+  if(cIin) document.getElementById('F_iin').value=cIin;
+  buildAll();
 }
 
-function fmt(n){ return n.toLocaleString('ru-RU'); }
-function fmtDate(d){ try{ return new Date(d+'T12:00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}); }catch(e){ return d; } }
+// ========== TRANSLATIONS ==========
+const L={
+  ru:{badge:'Электронные документы',sub:'Финансовый консалтинг · Астана',for:'Документы подготовлены для',csum:'Сумма кредита',fee:'Вознаграждение',srv:'Услуга:',bank:'Банк:',pay:'Оплата:',after:'только после получения кредита',imp:'⚠️ Важно',preT:'Документы подписываются до получения кредита. Обязательство по оплате — в течение 3 рабочих дней после зачисления.',s1:'Читаете и принимаете договор',s2:'Читаете и принимаете согласие на обработку данных',s3:'Ставите одну подпись для всех документов',s4:'Скачиваете PDF со своей подписью',startBtn:'Начать подписание →',cTitle:'ДОГОВОР',tab1:'Договор',tab2:'Согласие',tab3:'Акт',scroll:'↓ Прокрутите до конца',scrollD:'✓ Прочитано',agree1:'Я прочитал(а) и принимаю условия договора.',toConsent:'Далее: Согласие →',conTitle:'СОГЛАСИЕ НА ОБРАБОТКУ ДАННЫХ',agree2:'Я даю согласие на сбор и обработку моих персональных данных.',toAct:'Далее: Акт →',actTitle:'АКТ ВЫПОЛНЕННЫХ РАБОТ',agree3:'Я ознакомился(лась) с актом и подтверждаю условия.',toSign:'Перейти к подписанию →',sigTitle:'ПОДПИСЬ',signNote:'Одна подпись применяется ко всем документам:',signNoteSpan:'договору, согласию и акту',fio:'ФИО',phone:'Телефон *',iin:'ИИН *',iinH:'12 цифр — индивидуальный идентификационный номер',sig:'Электронная подпись',ch:'Подпишитесь пальцем или мышью',clr:'✕ Очистить',conNote:'Нажимая «Подписать», вы подписываете все 3 документа одновременно. Обработка данных — Закон РК №94-V от 21.05.2013.',signBtn:'✓ ПОДПИСАТЬ ВСЕ ДОКУМЕНТЫ',done:'ПОДПИСАНО',doneSub:'Все документы подписаны. Менеджер SUNKAR FINANCE свяжется с вами.',pdfBtn:'⬇ СКАЧАТЬ PDF — ВСЕ ДОКУМЕНТЫ',waBtn:'Написать менеджеру в WhatsApp',foot:'Сохраните этот экран как подтверждение\nSUNKAR FINANCE · г. Астана, пр. Абая 18, БЦ Шахар',rClient:'Клиент',rPhone:'Телефон',rIin:'ИИН',rSrv:'Услуга',rAmt:'Кредит',rFee:'Вознаграждение',rDoc:'Договор',rSigned:'Подписан',rCode:'Код подтверждения',errIin:'Введите ИИН — 12 цифр',errPhone:'Введите номер телефона',errSig:'Поставьте подпись'},
+  kz:{badge:'Электрондық құжаттар',sub:'Қаржылық консалтинг · Астана',for:'Құжаттар дайындалды',csum:'Несие сомасы',fee:'Сыйақы',srv:'Қызмет:',bank:'Банк:',pay:'Төлем:',after:'несие алғаннан кейін ғана',imp:'⚠️ Маңызды',preT:'Құжаттар несие алынғанға дейін қол қойылады. Сыйақы төлеу міндеттемесі қаражат түскеннен кейін 3 жұмыс күні ішінде туындайды.',s1:'Шарт талаптарын оқып, қабылдайсыз',s2:'Дербес деректерді өңдеуге келісімді оқып, қабылдайсыз',s3:'Барлық құжаттарға бір қолтаңба қоясыз',s4:'Қолтаңбаңыз бар PDF жүктейсіз',startBtn:'Қол қоюды бастау →',cTitle:'ШАРТ',tab1:'Шарт',tab2:'Келісім',tab3:'Акт',scroll:'↓ Соңына дейін айналдырыңыз',scrollD:'✓ Оқылды',agree1:'Мен шарттың талаптарымен таныстым және қабылдаймын.',toConsent:'Келесі: Келісім →',conTitle:'ДЕРБЕС ДЕРЕКТЕРДІ ӨҢДЕУГЕ КЕЛІСІМ',agree2:'Мен дербес деректерімді жинауға және өңдеуге келісімімді беремін.',toAct:'Келесі: Акт →',actTitle:'ОРЫНДАЛҒАН ЖҰМЫСТАР АКТІСІ',agree3:'Мен актімен таныстым және шарттарды растаймын.',toSign:'Қол қоюға өту →',sigTitle:'ҚОЛ ҚОЮ',signNote:'Бір қолтаңба барлық құжаттарға қолданылады:',signNoteSpan:'шарт, келісім және акт',fio:'Т.А.Ә.',phone:'Телефон *',iin:'ЖСН *',iinH:'12 сан — жеке сәйкестендіру нөмірі',sig:'Электрондық қолтаңба',ch:'Саусағыңызбен немесе тінтуірмен қол қойыңыз',clr:'✕ Өшіру',conNote:'«Қол қою» батырмасын басу арқылы сіз 3 құжатты бір мезгілде қол қоясыз. Деректерді өңдеу — ҚР №94-V Заңы 21.05.2013 ж.',signBtn:'✓ БАРЛЫҚ ҚҰЖАТТАРҒА ҚОЛ ҚОЮ',done:'ҚОЛ ҚОЙЫЛДЫ',doneSub:'Барлық құжаттарға қол қойылды. SUNKAR FINANCE менеджері сізбен байланысады.',pdfBtn:'⬇ PDF ЖҮКТЕУ — БАРЛЫҚ ҚҰЖАТТАР',waBtn:'Менеджерге WhatsApp-та жазу',foot:'Растау ретінде осы экранды сақтаңыз\nSUNKAR FINANCE · Астана қ., Абай даңғ. 18, Шахар ІО',rClient:'Тапсырыс беруші',rPhone:'Телефон',rIin:'ЖСН',rSrv:'Қызмет',rAmt:'Несие',rFee:'Сыйақы',rDoc:'Шарт',rSigned:'Қол қойылды',rCode:'Растау коды',errIin:'ЖСН-ді енгізіңіз — 12 сан',errPhone:'Телефон нөмірін енгізіңіз',errSig:'Қолтаңба қойыңыз'}
+};
 
-// ============ INIT ============
-initParams();
+function setLang(l){
+  lang=l;
+  document.getElementById('btnRu').className='lang-btn'+(l==='ru'?' active':'');
+  document.getElementById('btnKz').className='lang-btn'+(l==='kz'?' active':'');
+  const t=L[l];
+  const m={'L_badge':'badge','L_sub':'sub','L_for':'for','L_csum':'csum','L_fee':'fee','L_srv':'srv','L_bank':'bank','L_pay':'pay','L_after':'after','L_imp':'imp','L_preT':'preT','L_s1':'s1','L_s2':'s2','L_s3':'s3','L_s4':'s4','L_startBtn':'startBtn','L_cTitle':'cTitle','L_tab1':'tab1','L_tab2':'tab2','L_tab3':'tab3','L_conTitle':'conTitle','L_actTitle':'actTitle','L_sigTitle':'sigTitle','L_fio':'fio','L_phone':'phone','L_iin':'iin','L_iinH':'iinH','L_sig':'sig','L_clr':'clr','L_conNote':'conNote','L_signBtn':'signBtn','L_done':'done','L_doneSub':'doneSub','L_pdfBtn':'pdfBtn','L_waBtn':'waBtn','L_tab1b':'tab1','L_tab2b':'tab2','L_tab3b':'tab3','L_tab1c':'tab1','L_tab2c':'tab2','L_tab3c':'tab3'};
+  Object.entries(m).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&t[key])el.textContent=t[key];});
+  // Special
+  const sn=document.getElementById('L_signNote');if(sn)sn.textContent=t.signNote;
+  const ss=document.querySelectorAll('.docs-sign-note span');ss.forEach(s=>s.textContent=t.signNoteSpan);
+  document.getElementById('L_agree1')&&(document.getElementById('L_agree1').textContent=t.agree1);
+  document.getElementById('L_agree2')&&(document.getElementById('L_agree2').textContent=t.agree2);
+  document.getElementById('L_agree3')&&(document.getElementById('L_agree3').textContent=t.agree3);
+  document.getElementById('NXT1')&&(document.getElementById('NXT1').textContent=t.toConsent);
+  document.getElementById('NXT2')&&(document.getElementById('NXT2').textContent=t.toAct);
+  document.getElementById('NXT3')&&(document.getElementById('NXT3').textContent=t.toSign);
+  document.getElementById('RS1')&&(document.getElementById('RS1').textContent=t.scroll);
+  document.getElementById('RS2')&&(document.getElementById('RS2').textContent=t.scroll);
+  document.getElementById('RS3')&&(document.getElementById('RS3').textContent=t.scroll);
+  document.getElementById('CH2')&&(document.getElementById('CH2').textContent=t.ch);
+  document.getElementById('I_type')&&(document.getElementById('I_type').textContent=(l==='kz'?TYPES_KZ:TYPES_RU)[cTypeIdx]);
+  buildAll();
+}
 
-// Screen 1
-document.getElementById('i_name').textContent = clientName;
-document.getElementById('i_amount').textContent = creditAmount ? fmt(creditAmount)+' ₸' : '—';
-document.getElementById('i_fee').textContent = feeAmount ? fmt(feeAmount)+' ₸' : '—';
-document.getElementById('i_type').textContent = creditType;
-if(bankName){ document.getElementById('i_bank').textContent=bankName; document.getElementById('i_bank_wrap').style.display=''; }
-if(docType==='pre') document.getElementById('preNotice').style.display='block';
+// ========== BUILD DOCS ==========
+function ctype(){return(lang==='kz'?TYPES_KZ:TYPES_RU)[cTypeIdx];}
 
-// Screen 3
-document.getElementById('s_fio').value = clientName;
-document.getElementById('s_phone').value = clientPhone;
-if(clientIin) document.getElementById('s_iin').value = clientIin;
-
-// Contract text
-buildContract();
-
-// ============ CONTRACT TEXT ============
 function buildContract(){
-  const dateStr = fmtDate(docDate);
-  const preText = docType==='pre'
-    ? `<div class="c-hl">⚠️ Настоящий договор является <strong>предварительным</strong> и подписывается Заказчиком до момента фактического получения кредитных средств. С момента подписания у Заказчика возникает обязательство выплатить вознаграждение Исполнителю согласно условиям раздела 3.</div>`
-    : '';
-  const html = `
-<div class="c-title">ДОГОВОР ОБ ОКАЗАНИИ КОНСУЛЬТАЦИОННЫХ УСЛУГ</div>
-<p class="c-p">Договор № <strong>${docNum}</strong> &nbsp;|&nbsp; ${dateStr}</p>
-<p class="c-p"><strong>Исполнитель:</strong> Калиев Темиржан, действующий под брендом SUNKAR FINANCE, г. Астана, тел. +7 705 260 66 67.</p>
-<p class="c-p"><strong>Заказчик:</strong> ${clientName}${clientPhone?', тел. '+clientPhone:''}.</p>
-<p class="c-p">Стороны заключили настоящий договор о нижеследующем.</p>
-${preText}
+  const isPre=docType==='pre';
+  return `<div class="ct">${lang==='kz'?'ШАРТ':'ДОГОВОР'} № ${docNum}</div>
+<p class="cp">Астана ${lang==='kz'?'қ':'г'}. · ${fmtD(docDate)}</p>
+<p class="cp"><strong>${lang==='kz'?'Орындаушы':'Исполнитель'}:</strong> Калиев Темиржан, SUNKAR FINANCE, ${lang==='kz'?'Астана қ.':'г. Астана'}, тел. +7 705 260 66 67.</p>
+<p class="cp"><strong>${lang==='kz'?'Тапсырыс беруші':'Заказчик'}:</strong> ${cName}${cPhone?', тел. '+cPhone:''}.</p>
+${isPre?`<div class="ch">${lang==='kz'?'⚠️ <strong>Алдын ала шарт</strong> — несие алынғанға дейін қол қойылады.':'⚠️ <strong>Предварительный договор</strong> — подписывается до получения кредита.'}</div>`:''}
+<div class="ct">1. ${lang==='kz'?'ШАРТТЫҢ МӘНІ':'ПРЕДМЕТ ДОГОВОРА'}</div>
+<p class="cp">1.1. ${lang==='kz'?'Орындаушы Тапсырыс берушіге несиелеу саласында кеңес беру қызметтерін көрсетеді.':'Исполнитель оказывает консультационные услуги в сфере кредитования.'}</p>
+<p class="cp">1.2. ${lang==='kz'?'Мақсат':'Цель'}: <strong>${ctype()}</strong>${cAmt?' — <strong>'+fmt(cAmt)+' '+( lang==='kz'?'теңге':'тенге')+'</strong>':''}${cBank?' ('+cBank+')':''}.</p>
+<p class="cp">1.3. ${lang==='kz'?'Орындаушы банк болып табылмайды. Несие шешімін тек кредитор қабылдайды.':'Исполнитель не является банком. Решение принимает кредитная организация.'}</p>
+<div class="ct">2. ${lang==='kz'?'ТАРАПТАРДЫҢ МІНДЕТТЕРІ':'ОБЯЗАННОСТИ СТОРОН'}</div>
+<p class="cp"><strong>${lang==='kz'?'Орындаушы міндеттенеді':'Исполнитель обязуется'}:</strong></p>
+<div class="ci">${lang==='kz'?'несие тарихын талдауға':'анализ кредитной истории'}</div>
+<div class="ci">${lang==='kz'?'оңтайлы несие шарттарын іріктеуге':'подбор оптимальных условий кредитования'}</div>
+<div class="ci">${lang==='kz'?'банкке өтінім беруге және сүйемелдеуге':'подача заявки и сопровождение в банке'}</div>
+<div class="ci">${lang==='kz'?'дербес деректердің құпиялылығын сақтауға':'соблюдение конфиденциальности данных'}</div>
+<p class="cp" style="margin-top:10px"><strong>${lang==='kz'?'Тапсырыс беруші міндеттенеді':'Заказчик обязуется'}:</strong></p>
+<div class="ci">${lang==='kz'?'дұрыс деректер беруге':'предоставить достоверные данные'}</div>
+<div class="ci">${lang==='kz'?'мерзімі өткен берешектің жоқтығын растауға':'подтвердить отсутствие просрочек'}</div>
+<div class="ci">${lang==='kz'?'3-бөлімге сәйкес сыйақы төлеуге':'выплатить вознаграждение согласно разделу 3'}</div>
+<div class="ct">3. ${lang==='kz'?'ҚҰНЫ ЖӘНЕ ТӨЛЕМ':'СТОИМОСТЬ И ОПЛАТА'}</div>
+${cFee?`<p class="cp">3.1. ${lang==='kz'?'Орындаушының сыйақысы':'Вознаграждение Исполнителя'}: <strong>${fmt(cFee)} ${lang==='kz'?'теңге':'тенге'}</strong>.</p>`:`<p class="cp">3.1. ${lang==='kz'?'Сыйақы мөлшері тараптармен келісілді.':'Размер вознаграждения согласован сторонами.'}</p>`}
+<div class="ch">${lang==='kz'?'<strong>Алдын ала төлемсіз.</strong> Сыйақы несие есепшотқа түскеннен кейін 3 жұмыс күні ішінде төленеді. Банк бас тартқан жағдайда — ешқандай төлем жоқ.':'<strong>Без предоплаты.</strong> Вознаграждение выплачивается в течение 3 рабочих дней после зачисления кредита. При отказе банка — никаких выплат.'}</div>
+<div class="ct">4. ${lang==='kz'?'ЖАУАПКЕРШІЛІК':'ОТВЕТСТВЕННОСТЬ'}</div>
+<p class="cp">4.1. ${lang==='kz'?'Несие алғаннан кейін сыйақы төлеуден жалтару шартты бұзу болып табылады. Орындаушы берешекті сот тәртібімен өндіруге құқылы (ҚР АК).':'Уклонение от выплаты после получения кредита — нарушение договора. Исполнитель вправе взыскать задолженность в судебном порядке (ГК РК).'}</p>
+<div class="ct">5. ${lang==='kz'?'ӨЗГЕ ТАЛАПТАР':'ПРОЧИЕ УСЛОВИЯ'}</div>
+<p class="cp">5.1. ${lang==='kz'?'Шарт электрондық қол қойылған сәттен күшіне енеді. Электрондық қол қою ҚР АК 395-бабына сәйкес теңдестіріледі.':'Договор вступает в силу с момента подписания. Электронная подпись равнозначна собственноручной (ст. 395 ГК РК).'}</p>`;
+}
 
-<div class="c-title">1. ПРЕДМЕТ ДОГОВОРА</div>
-<p class="c-p">1.1. Исполнитель оказывает Заказчику консультационные услуги в сфере кредитования: подбор кредитного продукта, подготовку документов и сопровождение заявки до момента получения одобрения.</p>
-<p class="c-p">1.2. Цель: получение Заказчиком <strong>${creditType}</strong>${creditAmount?` на сумму <strong>${fmt(creditAmount)} тенге</strong>`:''}${bankName?' в '+bankName:''}.</p>
-<p class="c-p">1.3. Исполнитель не является банком или МФО и не выдаёт кредиты от своего имени. Решение об одобрении принимает кредитная организация.</p>
+function buildConsent(){
+  return `<div class="ct">${lang==='kz'?'ДЕРБЕС ДЕРЕКТЕРДІ ЖИНАУҒА ЖӘНЕ ӨҢДЕУГЕ КЕЛІСІМ':'СОГЛАСИЕ НА СБОР И ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ'}</div>
+<p class="cp">${lang==='kz'?'Шарт':'Договор'} № ${docNum} · ${fmtD(docDate)}</p>
+<p class="cp">${lang==='kz'?'Мен':'Я'}, <strong>${cName}</strong>${cIin?', ЖСН/ИИН: '+cIin:''}${cPhone?', тел. '+cPhone:''},</p>
+<p class="cp">${lang==='kz'?'SUNKAR FINANCE (Калиев Темиржан) атауымен танымал қаржылық консалтинг компаниясына дербес деректерімді жинауға, сақтауға, өңдеуге және пайдалануға ерікті түрде келісімімді беремін.':'настоящим даю добровольное согласие SUNKAR FINANCE (Калиев Темиржан) на сбор, хранение, обработку и использование моих персональных данных.'}</p>
+<div class="ct">${lang==='kz'?'ӨҢДЕУ МАҚСАТТАРЫ':'ЦЕЛИ ОБРАБОТКИ'}</div>
+<div class="ci">${lang==='kz'?'несие өтінімін қарау және өңдеу':'рассмотрение и обработка заявки на кредит'}</div>
+<div class="ci">${lang==='kz'?'несие өтінімін беру үшін банктер мен МҚҰ-ларға деректерді жіберу':'передача данных в банки и МФО для подачи кредитной заявки'}</div>
+<div class="ci">${lang==='kz'?'қаржылық-консалтинг қызметтерін көрсету':'оказание финансово-консультационных услуг'}</div>
+<div class="ci">${lang==='kz'?'ҚР заңнамасына сәйкес хабарламалар жіберу':'направление уведомлений согласно законодательству РК'}</div>
+<div class="ct">${lang==='kz'?'ДЕРЕКТЕР ТІЗІМІ':'ПЕРЕЧЕНЬ ДАННЫХ'}</div>
+<div class="ci">${lang==='kz'?'тегі, аты, әкесінің аты':'фамилия, имя, отчество'}</div>
+<div class="ci">${lang==='kz'?'жеке сәйкестендіру нөмірі (ЖСН)':'индивидуальный идентификационный номер (ИИН)'}</div>
+<div class="ci">${lang==='kz'?'байланыс телефоны':'контактный телефон'}</div>
+<div class="ci">${lang==='kz'?'несие тарихы туралы мәліметтер':'сведения о кредитной истории'}</div>
+<div class="ct">${lang==='kz'?'САҚТАУ МЕРЗІМІ':'СРОК ХРАНЕНИЯ'}</div>
+<p class="cp">${lang==='kz'?'Қол қойылған күннен бастап 5 жыл, егер заңнамада өзге мерзім белгіленбесе.':'5 лет с даты подписания, если иное не предусмотрено законодательством.'}</p>
+<div class="ct">${lang==='kz'?'КЕЛІСІМДІ КЕРІ ҚАЙТАРЫП АЛУ':'ОТЗЫВ СОГЛАСИЯ'}</div>
+<p class="cp">${lang==='kz'?'Мен осы келісімді Орындаушыға жазбаша хабарлама жолдау арқылы кез келген уақытта кері қайтарып алуға құқылымын.':'Я вправе отозвать настоящее согласие в любое время путём письменного уведомления Исполнителя.'}</p>
+<div class="ch">${lang==='kz'?'ҚР 21.05.2013 ж. №94-V «Дербес деректер және оларды қорғау туралы» Заңы, ҚР 24.11.2015 ж. №418-V «Ақпараттандыру туралы» Заңы негізінде жасалды.':'Составлено на основании Закона РК №94-V от 21.05.2013 «О персональных данных и их защите», Закона РК №418-V от 24.11.2015 «Об информатизации».'}</div>`;
+}
 
-<div class="c-title">2. ОБЯЗАННОСТИ СТОРОН</div>
-<p class="c-p"><strong>Исполнитель обязуется:</strong></p>
-<div class="c-item">провести анализ кредитной истории Заказчика;</div>
-<div class="c-item">подобрать оптимальные кредитные условия;</div>
-<div class="c-item">подготовить и подать документы в кредитную организацию;</div>
-<div class="c-item">сопровождать Заказчика до получения решения и выдачи кредита;</div>
-<div class="c-item">соблюдать конфиденциальность персональных данных Заказчика.</div>
-<p class="c-p" style="margin-top:10px"><strong>Заказчик обязуется:</strong></p>
-<div class="c-item">предоставить достоверные данные о финансовом положении;</div>
-<div class="c-item">подтвердить отсутствие текущих просрочек по кредитам;</div>
-<div class="c-item">своевременно предоставлять запрашиваемые документы;</div>
-<div class="c-item">выплатить вознаграждение Исполнителю в соответствии с разделом 3.</div>
+function buildAct(){
+  return `<div class="ct">${lang==='kz'?'ОРЫНДАЛҒАН ЖҰМЫСТАР АКТІСІ':'АКТ ВЫПОЛНЕННЫХ РАБОТ'} № ${docNum}-А</div>
+<p class="cp">${lang==='kz'?'Шартқа':'К договору'} № ${docNum} · ${fmtD(docDate)}</p>
+<p class="cp"><strong>${lang==='kz'?'Орындаушы':'Исполнитель'}:</strong> Калиев Темиржан, SUNKAR FINANCE, тел. +7 705 260 66 67.</p>
+<p class="cp"><strong>${lang==='kz'?'Тапсырыс беруші':'Заказчик'}:</strong> ${cName}${cPhone?', тел. '+cPhone:''}.</p>
+<div class="ct">${lang==='kz'?'КӨРСЕТІЛГЕН ҚЫЗМЕТТЕР':'ОКАЗАННЫЕ УСЛУГИ'}</div>
+<div class="ci">${lang==='kz'?'несие тарихын талдау':'анализ кредитной истории Заказчика'}</div>
+<div class="ci">${lang==='kz'?'несие өнімін іріктеу':'подбор кредитного продукта'}: ${ctype()}</div>
+<div class="ci">${lang==='kz'?'банкке өтінімді дайындау және беру':'подготовка и подача заявки в кредитную организацию'}</div>
+<div class="ci">${lang==='kz'?'несие мақұлдануына дейін сүйемелдеу':'сопровождение до получения одобрения'}</div>
+<div class="ct">${lang==='kz'?'ҚАРЖЫЛЫҚ ШАРТТАР':'ФИНАНСОВЫЕ УСЛОВИЯ'}</div>
+${cAmt?`<div class="ci">${lang==='kz'?'Несие сомасы':'Сумма кредита'}: <strong>${fmt(cAmt)} ${lang==='kz'?'теңге':'тенге'}</strong></div>`:''}
+${cFee?`<div class="ci">${lang==='kz'?'Орындаушы сыйақысы':'Вознаграждение Исполнителя'}: <strong>${fmt(cFee)} ${lang==='kz'?'теңге':'тенге'}</strong></div>`:''}
+<div class="ci">${lang==='kz'?'Төлем мерзімі: несие алғаннан кейін 3 жұмыс күні':'Срок оплаты: 3 рабочих дня после получения кредита'}</div>
+<div class="ch">${lang==='kz'?'Тараптар қызметтердің толық көлемде, тиісті мерзімде және сапада көрсетілгенін растайды. Тапсырыс берушінің Орындаушыға шағымдары жоқ.':'Стороны подтверждают, что услуги оказаны в полном объёме, в установленные сроки и надлежащего качества. Претензий Заказчика к Исполнителю нет.'}</div>
+<p class="cp" style="font-size:11px;color:var(--muted)">${lang==='kz'?'* Бұл акт алдын ала болып табылады. Несие нақты алынғаннан кейін тараптар оны растайды.':'* Настоящий акт является предварительным. После фактического получения кредита стороны его подтверждают.'}</p>`;
+}
 
-<div class="c-title">3. СТОИМОСТЬ И ОПЛАТА</div>
-${feeAmount?`<p class="c-p">3.1. Вознаграждение Исполнителя составляет <strong>${fmt(feeAmount)} тенге</strong>.</p>`:'<p class="c-p">3.1. Размер вознаграждения согласован сторонами.</p>'}
-<div class="c-hl"><strong>Без предоплаты.</strong> Вознаграждение выплачивается исключительно после фактического зачисления кредитных средств на счёт Заказчика — в течение 3 (трёх) рабочих дней с момента получения. В случае отказа банка никаких платежей не производится.</div>
-<p class="c-p">3.3. Факт оказания услуг подтверждается Актом выполненных работ, подписанным обеими сторонами.</p>
+function buildAll(){
+  const c=document.getElementById('CB1');if(c)c.innerHTML=buildContract();
+  const c2=document.getElementById('CB2');if(c2)c2.innerHTML=buildConsent();
+  const c3=document.getElementById('CB3');if(c3)c3.innerHTML=buildAct();
+  bindScroll('CB1','RF1','RS1','AG1',1);
+  bindScroll('CB2','RF2','RS2','AG2',2);
+  bindScroll('CB3','RF3','RS3','AG3',3);
+}
 
-<div class="c-title">4. ОТВЕТСТВЕННОСТЬ</div>
-<p class="c-p">4.1. Уклонение от выплаты вознаграждения после получения кредита является нарушением настоящего договора. Исполнитель вправе взыскать задолженность в судебном порядке согласно ГК РК.</p>
-<p class="c-p">4.2. Исполнитель не несёт ответственности за отказ кредитной организации при условии добросовестного исполнения своих обязательств.</p>
-<p class="c-p">4.3. При предоставлении Заказчиком заведомо ложных сведений Исполнитель вправе расторгнуть договор.</p>
-
-<div class="c-title">5. ПЕРСОНАЛЬНЫЕ ДАННЫЕ</div>
-<p class="c-p">5.1. Подписывая договор, Заказчик даёт согласие на обработку персональных данных согласно Закону РК «О персональных данных и их защите» №94-V от 21.05.2013 в целях оказания услуг по настоящему договору.</p>
-<p class="c-p">5.2. Данные могут быть переданы в банки и МФО исключительно для целей подачи кредитной заявки.</p>
-
-<div class="c-title">6. ПРОЧИЕ УСЛОВИЯ</div>
-<p class="c-p">6.1. Договор вступает в силу с момента электронного подписания и действует до полного исполнения обязательств.</p>
-<p class="c-p">6.2. До момента подачи заявки в банк Заказчик вправе расторгнуть договор в одностороннем порядке без финансовых обязательств.</p>
-<p class="c-p">6.3. Споры разрешаются в соответствии с законодательством Республики Казахстан.</p>
-<p class="c-p">6.4. Электронное подписание настоящего договора равнозначно собственноручной подписи согласно ст. 395 ГК РК.</p>
-`;
-  document.getElementById('contractBox').innerHTML = html;
-
-  // Scroll tracking
-  const box = document.getElementById('contractBox');
+function bindScroll(cbId,rfId,rsId,agId,n){
+  const box=document.getElementById(cbId);
+  if(!box)return;
+  box.onscroll=null;
   box.addEventListener('scroll',()=>{
-    const pct = box.scrollTop/(box.scrollHeight-box.clientHeight)*100;
-    document.getElementById('readFill').style.width = Math.min(pct,100)+'%';
+    const pct=box.scrollTop/(box.scrollHeight-box.clientHeight)*100||0;
+    const rf=document.getElementById(rfId);if(rf)rf.style.width=Math.min(pct,100)+'%';
     if(pct>88){
-      document.getElementById('readStatus').textContent='✓ Договор прочитан';
-      document.getElementById('readStatus').className='read-status done';
-      document.getElementById('agreeWrap').style.opacity='1';
-      document.getElementById('agreeWrap').style.pointerEvents='auto';
+      const rs=document.getElementById(rsId);if(rs){rs.textContent=L[lang].scrollD;rs.className='rs done';}
+      const ag=document.getElementById(agId);if(ag){ag.style.opacity='1';ag.style.pointerEvents='auto';}
     }
   });
 }
 
-function checkAgree(){
-  document.getElementById('nextBtn2').disabled = !document.getElementById('agreeChk').checked;
+function chk(n){
+  const checked=document.getElementById('CHK'+n).checked;
+  const nxt=document.getElementById('NXT'+n);
+  if(nxt)nxt.disabled=!checked;
 }
 
-// ============ CANVAS SIGNATURE ============
-const canvas = document.getElementById('sigCanvas');
-const ctx = canvas.getContext('2d');
-let drawing=false, hasSig=false;
-
+// ========== CANVAS ==========
+const canvas=document.getElementById('sigCanvas');
+const ctx=canvas.getContext('2d');
+let drawing=false;
 function initCanvas(){
   const dpr=window.devicePixelRatio||1;
-  const rect=canvas.getBoundingClientRect();
-  canvas.width=rect.width*dpr||canvas.offsetWidth*dpr;
-  canvas.height=(canvas.offsetHeight||150)*dpr;
+  canvas.width=(canvas.offsetWidth||300)*dpr;
+  canvas.height=140*dpr;
   ctx.scale(dpr,dpr);
-  ctx.strokeStyle='#00E676';
-  ctx.lineWidth=2.5;
-  ctx.lineCap='round';
-  ctx.lineJoin='round';
+  ctx.strokeStyle='#00E676';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';
 }
-
-canvas.addEventListener('mousedown',e=>{drawing=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
-canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();hasSig=true;document.getElementById('canvasHint').style.opacity='0'});
+function getP(e){const r=canvas.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top};}
+canvas.addEventListener('mousedown',e=>{drawing=true;const p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=getP(e);ctx.lineTo(p.x,p.y);ctx.stroke();hasSig=true;document.getElementById('CH2').style.opacity='0';});
 canvas.addEventListener('mouseup',()=>drawing=false);
-canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
-canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();hasSig=true;document.getElementById('canvasHint').style.opacity='0'},{passive:false});
+canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=getP(e);ctx.beginPath();ctx.moveTo(p.x,p.y);},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=getP(e);ctx.lineTo(p.x,p.y);ctx.stroke();hasSig=true;document.getElementById('CH2').style.opacity='0';},{passive:false});
 canvas.addEventListener('touchend',()=>drawing=false);
-function getPos(e){const r=canvas.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top}}
-function clearSig(){ctx.clearRect(0,0,canvas.width,canvas.height);hasSig=false;document.getElementById('canvasHint').style.opacity='1'}
+function clearSig(){ctx.clearRect(0,0,canvas.width,canvas.height);hasSig=false;document.getElementById('CH2').style.opacity='1';}
 
-// ============ SUBMIT ============
+// ========== SUBMIT ==========
 function submitSign(){
-  const iin = document.getElementById('s_iin').value.trim();
-  const phone = document.getElementById('s_phone').value.trim();
-  if(!iin||iin.length!==12){ document.getElementById('s_iin').classList.add('err'); alert('Укажите ИИН — 12 цифр'); return; }
-  if(!phone){ document.getElementById('s_phone').classList.add('err'); alert('Укажите номер телефона'); return; }
-  if(!hasSig){ alert('Пожалуйста, поставьте подпись'); return; }
-
-  clientPhone = phone;
-  clientIin = iin;
-
-  const now = new Date();
-  const timeStr = now.toLocaleString('ru-RU',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  const code = 'SF-'+docNum+'-'+Math.random().toString(36).substring(2,6).toUpperCase();
-
-  // Build receipt
-  document.getElementById('receiptBlock').innerHTML = `
-    <div class="receipt-row"><span class="r-lbl">Клиент</span><span class="r-val">${clientName}</span></div>
-    <div class="receipt-row"><span class="r-lbl">Телефон</span><span class="r-val">${clientPhone}</span></div>
-    <div class="receipt-row"><span class="r-lbl">ИИН</span><span class="r-val">${clientIin.substring(0,4)}****${clientIin.substring(8)}</span></div>
-    <div class="receipt-row"><span class="r-lbl">Услуга</span><span class="r-val">${creditType}</span></div>
-    ${creditAmount?`<div class="receipt-row"><span class="r-lbl">Кредит</span><span class="r-val">${fmt(creditAmount)} ₸</span></div>`:''}
-    ${feeAmount?`<div class="receipt-row"><span class="r-lbl">Вознаграждение</span><span class="r-val">${fmt(feeAmount)} ₸</span></div>`:''}
-    <div class="receipt-row"><span class="r-lbl">Договор</span><span class="r-val">№ ${docNum}</span></div>
-    <div class="receipt-row"><span class="r-lbl">Подписан</span><span class="r-val">${timeStr}</span></div>
-    <div class="receipt-code"><strong>${code}</strong>Код подтверждения</div>
-  `;
-
-  document.getElementById('contactWA').href = 'https://wa.me/77052606667?text='+encodeURIComponent(`Здравствуйте! Я подписал(а) договор SUNKAR FINANCE.\nКод подтверждения: ${code}\nИмя: ${clientName}`);
-
-  go(4);
-
-  // Notify Temirjan automatically
-  const notif = `✅ *ДОГОВОР ПОДПИСАН*\n\n👤 ${clientName}\n📱 ${clientPhone}\nИИН: ${clientIin}\n\n💼 ${creditType}${creditAmount?'\n💰 Кредит: '+fmt(creditAmount)+' ₸':''}\n${feeAmount?'💵 Наша сумма: '+fmt(feeAmount)+' ₸\n':''}\n📄 Договор №${docNum}\n🕐 ${timeStr}\n🔑 Код: ${code}`;
-  setTimeout(()=>{
-    window.open('https://wa.me/77052606667?text='+encodeURIComponent(notif),'_blank');
-  },1500);
+  const iin=document.getElementById('F_iin').value.trim();
+  const phone=document.getElementById('F_phone').value.trim();
+  const t=L[lang];
+  if(!iin||iin.length!==12){document.getElementById('F_iin').classList.add('err');alert(t.errIin);return;}
+  if(!phone){document.getElementById('F_phone').classList.add('err');alert(t.errPhone);return;}
+  if(!hasSig){alert(t.errSig);return;}
+  cPhone=phone;cIin=iin;
+  const now=new Date();
+  signedTime=now.toLocaleString('ru-RU',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  signedCode='SF-'+docNum+'-'+Math.random().toString(36).substring(2,6).toUpperCase();
+  const ct=lang==='kz'?TYPES_KZ[cTypeIdx]:TYPES_RU[cTypeIdx];
+  document.getElementById('RCPT').innerHTML=`
+    <div class="rr"><span class="rl">${t.rClient}</span><span class="rv">${cName}</span></div>
+    <div class="rr"><span class="rl">${t.rPhone}</span><span class="rv">${cPhone}</span></div>
+    <div class="rr"><span class="rl">${t.rIin}</span><span class="rv">${cIin.substring(0,4)}****${cIin.substring(8)}</span></div>
+    <div class="rr"><span class="rl">${t.rSrv}</span><span class="rv">${ct}</span></div>
+    ${cAmt?`<div class="rr"><span class="rl">${t.rAmt}</span><span class="rv">${fmt(cAmt)} ₸</span></div>`:''}
+    ${cFee?`<div class="rr"><span class="rl">${t.rFee}</span><span class="rv">${fmt(cFee)} ₸</span></div>`:''}
+    <div class="rr"><span class="rl">${t.rDoc}</span><span class="rv">№ ${docNum}</span></div>
+    <div class="rr"><span class="rl">${t.rSigned}</span><span class="rv">${signedTime}</span></div>
+    <div class="rcode"><strong>${signedCode}</strong>${t.rCode}</div>`;
+  document.getElementById('WA_link').href='https://wa.me/77052606667?text='+encodeURIComponent(`Сәлеметсіз бе!\nМен SUNKAR FINANCE шартына қол қойдым.\nКод: ${signedCode}\nАты-жөні: ${cName}`);
+  go(6);
+  const notif=`✅ *${lang==='kz'?'ШАРТҚА ҚОЛ ҚОЙЫЛДЫ':'ДОГОВОР ПОДПИСАН'}*\n\n👤 ${cName}\n📱 ${cPhone}\n${lang==='kz'?'ЖСН':'ИИН'}: ${cIin}\n💼 ${ct}${cAmt?'\n💰 '+fmt(cAmt)+' ₸':''}${cFee?'\n💵 '+(lang==='kz'?'Біздің сомамыз':'Наша сумма')+': '+fmt(cFee)+' ₸':''}\n📄 №${docNum}\n🕐 ${signedTime}\n🔑 ${signedCode}\n📋 3 ${lang==='kz'?'құжат қол қойылды':'документа подписано'}`;
+  setTimeout(()=>window.open('https://wa.me/77052606667?text='+encodeURIComponent(notif),'_blank'),1500);
 }
 
-// ============ NAVIGATION ============
-let currentScreen = 1;
+// ========== PDF ==========
+function generatePDF(){
+  if(!window.jspdf){alert('PDF library loading...');return;}
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF('p','mm','a4');
+  const pw=210,ml=18,mr=18,cw=pw-ml-mr;
+  const green=[0,160,80],blue=[41,121,255],dark=[20,20,50],grey=[100,100,100];
+  const sigImg=canvas.toDataURL('image/png');
+  const ct=lang==='kz'?TYPES_KZ[cTypeIdx]:TYPES_RU[cTypeIdx];
+
+  function header(y){
+    doc.setFillColor(6,13,31);
+    doc.rect(0,0,pw,y+14,'F');
+    doc.setFontSize(15);doc.setFont('helvetica','bold');
+    doc.setTextColor(...green);
+    doc.text('SUNKAR FINANCE',pw/2,y+7,{align:'center'});
+    doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(...grey);
+    doc.text(lang==='kz'?'Қаржылық консалтинг · Астана қ., Абай даңғ. 18, Шахар ІО':'Финансовый консалтинг · г. Астана, пр. Абая 18, БЦ Шахар, каб. 102',pw/2,y+12,{align:'center'});
+    doc.setDrawColor(...green);doc.setLineWidth(0.4);
+    doc.line(ml,y+15,pw-mr,y+15);
+    return y+20;
+  }
+
+  function title(doc,text,sub,y){
+    doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(...dark);
+    doc.text(text,pw/2,y,{align:'center'});
+    if(sub){doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(...grey);doc.text(sub,pw/2,y+5,{align:'center'});y+=5;}
+    return y+8;
+  }
+
+  function parties(doc,y){
+    doc.setFillColor(240,250,245);
+    doc.roundedRect(ml,y,cw,lang==='kz'?22:20,2,2,'F');
+    doc.setFontSize(9);doc.setFont('helvetica','bold');doc.setTextColor(...green);
+    doc.text(lang==='kz'?'Орындаушы:':'Исполнитель:',ml+3,y+5);
+    doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    doc.text('Калиев Темиржан (SUNKAR FINANCE) · +7 705 260 66 67',ml+28,y+5);
+    doc.setFont('helvetica','bold');doc.setTextColor(...green);
+    doc.text(lang==='kz'?'Тапсырыс беруші:':'Заказчик:',ml+3,y+11);
+    doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    const cinfo=`${cName}${cIin?' · '+lang==='kz'?'ЖСН: ':'ИИН: '+cIin:''}${cPhone?' · '+cPhone:''}`;
+    doc.text(cinfo,ml+35,y+11);
+    doc.setFont('helvetica','bold');doc.setTextColor(...green);
+    doc.text(lang==='kz'?'Шарт №:':'Договор №:',ml+3,y+17);
+    doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    doc.text(`${docNum} · ${fmtD(docDate)}`,ml+28,y+17);
+    return y+(lang==='kz'?24:22);
+  }
+
+  function section(doc,title,y){
+    doc.setFontSize(9.5);doc.setFont('helvetica','bold');doc.setTextColor(...green);
+    doc.text(title,ml,y);
+    doc.setDrawColor(...green);doc.setLineWidth(0.2);
+    doc.line(ml,y+1.5,pw-mr,y+1.5);
+    return y+6;
+  }
+
+  function body(doc,text,y){
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    const lines=doc.splitTextToSize(text,cw);
+    doc.text(lines,ml,y);
+    return y+lines.length*4.2;
+  }
+
+  function bullet(doc,text,y){
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    const lines=doc.splitTextToSize('— '+text,cw-5);
+    doc.text(lines,ml+3,y);
+    return y+lines.length*4.2;
+  }
+
+  function hl(doc,text,y){
+    const lines=doc.splitTextToSize(text,cw-8);
+    const h=lines.length*4.2+6;
+    doc.setFillColor(240,252,246);
+    doc.roundedRect(ml,y-3,cw,h,1.5,1.5,'F');
+    doc.setDrawColor(...green);doc.setLineWidth(0.8);
+    doc.line(ml,y-3,ml,y-3+h);
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    doc.text(lines,ml+5,y);
+    return y+h;
+  }
+
+  function sigBlock(doc,y){
+    const now=signedTime||new Date().toLocaleString('ru-RU',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    // Left: client
+    doc.setFontSize(8.5);doc.setFont('helvetica','bold');doc.setTextColor(...green);
+    doc.text(lang==='kz'?'ТАПСЫРЫС БЕРУШІ / ЗАКАЗЧИК':'ЗАКАЗЧИК',ml,y);
+    doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    doc.text(cName,ml,y+5);
+    if(cIin) doc.text((lang==='kz'?'ЖСН: ':'ИИН: ')+cIin,ml,y+9);
+    doc.text((lang==='kz'?'Күні: ':'Дата: ')+now,ml,y+13);
+    // Signature image
+    doc.addImage(sigImg,'PNG',ml,y+15,55,18);
+    doc.setDrawColor(200);doc.setLineWidth(0.3);
+    doc.line(ml,y+35,ml+55,y+35);
+    doc.setFontSize(7);doc.setTextColor(...grey);
+    doc.text(lang==='kz'?'қолтаңба / подпись':'подпись',ml,y+38);
+    // Right: executor
+    const rx=pw/2+5;
+    doc.setFontSize(8.5);doc.setFont('helvetica','bold');doc.setTextColor(...green);
+    doc.text(lang==='kz'?'ОРЫНДАУШЫ / ИСПОЛНИТЕЛЬ':'ИСПОЛНИТЕЛЬ',rx,y);
+    doc.setFont('helvetica','normal');doc.setTextColor(...dark);
+    doc.text('Калиев Темиржан',rx,y+5);
+    doc.text('SUNKAR FINANCE',rx,y+9);
+    doc.text('+7 705 260 66 67',rx,y+13);
+    doc.setDrawColor(150);doc.setLineWidth(0.3);
+    doc.line(rx,y+35,rx+60,y+35);
+    doc.setFontSize(7);doc.setTextColor(...grey);
+    doc.text(lang==='kz'?'қолтаңба / подпись':'подпись',rx,y+38);
+    return y+44;
+  }
+
+  function footer(doc,pageNum){
+    doc.setFontSize(7);doc.setTextColor(...grey);
+    doc.text(`SUNKAR FINANCE · +7 705 260 66 67 · sunkar-finance-astana.github.io/KZ`,pw/2,290,{align:'center'});
+    doc.text(`${signedCode} · ${lang==='kz'?'Бет':'Стр.'} ${pageNum}`,pw/2,293,{align:'center'});
+  }
+
+  // ===== PAGE 1: CONTRACT =====
+  let y=header(8);
+  y=title(doc,lang==='kz'?`ШАРТ № ${docNum}`:`ДОГОВОР № ${docNum}`,lang==='kz'?`Астана қ. · ${fmtD(docDate)}`:`г. Астана · ${fmtD(docDate)}`,y);
+  if(docType==='pre'){
+    y=hl(doc,lang==='kz'?'⚠ АЛДЫН АЛА ШАРТ — несие алынғанға дейін қол қойылады. Сыйақы төлеу міндеттемесі несие есепшотқа түскеннен кейін 3 жұмыс күні ішінде туындайды.':'⚠ ПРЕДВАРИТЕЛЬНЫЙ ДОГОВОР — подписывается до получения кредита. Обязательство по оплате возникает в течение 3 рабочих дней после зачисления средств.',y)+2;
+  }
+  y=parties(doc,y)+2;
+  y=section(doc,lang==='kz'?'1. ШАРТТЫҢ МӘНІ':'1. ПРЕДМЕТ ДОГОВОРА',y);
+  y=body(doc,lang==='kz'?`Орындаушы Тапсырыс берушіге несиелеу саласында кеңес беру қызметтерін көрсетеді: несие тарихын талдау, ${ct} бойынша өнімді іріктеу${cAmt?' ('+fmt(cAmt)+' теңге сомасына)':''}, банкке өтінімді дайындау және мақұлдауға дейін сүйемелдеу. Орындаушы банк болып табылмайды.`:`Исполнитель оказывает консультационные услуги: анализ кредитной истории, подбор продукта «${ct}»${cAmt?' на сумму '+fmt(cAmt)+' тенге':''}, подготовка заявки и сопровождение. Исполнитель не является банком.`,y);
+  y=section(doc,lang==='kz'?'2. ТАРАПТАРДЫҢ МІНДЕТТЕРІ':'2. ОБЯЗАННОСТИ СТОРОН',y+1);
+  y=bullet(doc,lang==='kz'?'несие тарихын талдауға, оңтайлы несие шарттарын іріктеуге':'анализ истории, подбор оптимальных условий',y);
+  y=bullet(doc,lang==='kz'?'банкке өтінімді дайындауға және жіберуге':'подготовка и подача заявки в кредитную организацию',y);
+  y=bullet(doc,lang==='kz'?'несие алынғанға дейін сүйемелдеуге':'сопровождение до получения кредита',y);
+  y=bullet(doc,lang==='kz'?'дербес деректердің құпиялылығын сақтауға':'соблюдение конфиденциальности данных',y);
+  y=section(doc,lang==='kz'?'3. ҚҰНЫ ЖӘНЕ ТӨЛЕМ':'3. СТОИМОСТЬ И ОПЛАТА',y+1);
+  if(cFee) y=body(doc,(lang==='kz'?'Орындаушының сыйақысы: ':'Вознаграждение Исполнителя: ')+fmt(cFee)+(lang==='kz'?' теңге.'  :' тенге.'),y);
+  y=hl(doc,lang==='kz'?`АЛДЫН АЛА ТӨЛЕМСІЗ. Сыйақы несие есепшотқа түскеннен кейін 3 жұмыс күні ішінде төленеді. Банк бас тартқан жағдайда — ешқандай төлем жоқ.`:`БЕЗ ПРЕДОПЛАТЫ. Вознаграждение выплачивается в течение 3 рабочих дней после зачисления кредита. При отказе банка — никаких выплат.`,y+1)+1;
+  y=section(doc,lang==='kz'?'4. ЖАУАПКЕРШІЛІК':'4. ОТВЕТСТВЕННОСТЬ',y+1);
+  y=body(doc,lang==='kz'?'Несие алғаннан кейін сыйақы төлеуден жалтару шартты бұзу болып табылады. Орындаушы берешекті сот тәртібімен өндіруге құқылы (ҚР АК). Электрондық қол қою ҚР АК 395-бабына сәйкес теңдестіріледі.':'Уклонение от выплаты после получения кредита — нарушение договора (ГК РК). Электронная подпись равнозначна собственноручной (ст. 395 ГК РК).',y);
+  y+=4;
+  if(y>210){doc.addPage();y=header(8);footer(doc,1);y+=4;}
+  y=sigBlock(doc,y);
+  footer(doc,1);
+
+  // ===== PAGE 2: CONSENT =====
+  doc.addPage();
+  y=header(8);
+  y=title(doc,lang==='kz'?'ДЕРБЕС ДЕРЕКТЕРДІ ЖИНАУҒА ЖӘНЕ ӨҢДЕУГЕ КЕЛІСІМ':'СОГЛАСИЕ НА СБОР И ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ',`${lang==='kz'?'Шарт':'Договор'} № ${docNum} · ${fmtD(docDate)}`,y);
+  y=parties(doc,y)+2;
+  y=body(doc,lang==='kz'?`Мен, ${cName}${cIin?', ЖСН: '+cIin:''}${cPhone?', тел. '+cPhone:''}, SUNKAR FINANCE (Калиев Темиржан) атауымен танымал қаржылық консалтинг компаниясына дербес деректерімді жинауға, сақтауға, өңдеуге және пайдалануға ерікті түрде келісімімді беремін.`:`Я, ${cName}${cIin?', ИИН: '+cIin:''}${cPhone?', тел. '+cPhone:''}, настоящим даю добровольное согласие SUNKAR FINANCE (Калиев Темиржан) на сбор, хранение, обработку и использование моих персональных данных.`,y);
+  y=section(doc,lang==='kz'?'ӨҢДЕУ МАҚСАТТАРЫ':'ЦЕЛИ ОБРАБОТКИ',y+2);
+  y=bullet(doc,lang==='kz'?'несие өтінімін қарау және өңдеу':'рассмотрение и обработка заявки на кредит',y);
+  y=bullet(doc,lang==='kz'?'банктер мен МҚҰ-ларға деректерді жіберу':'передача данных в банки и МФО для подачи заявки',y);
+  y=bullet(doc,lang==='kz'?'қаржылық-консалтинг қызметтерін көрсету':'оказание финансово-консультационных услуг',y);
+  y=section(doc,lang==='kz'?'ДЕРЕКТЕР ТІЗІМІ':'ПЕРЕЧЕНЬ ДАННЫХ',y+2);
+  y=bullet(doc,lang==='kz'?'тегі, аты, әкесінің аты':'ФИО',y);
+  y=bullet(doc,lang==='kz'?'жеке сәйкестендіру нөмірі (ЖСН/ИИН)':'ИИН',y);
+  y=bullet(doc,lang==='kz'?'байланыс телефоны':'контактный телефон',y);
+  y=bullet(doc,lang==='kz'?'несие тарихы туралы мәліметтер':'сведения о кредитной истории',y);
+  y=section(doc,lang==='kz'?'САҚТАУ МЕРЗІМІ':'СРОК ХРАНЕНИЯ',y+2);
+  y=body(doc,lang==='kz'?'Қол қойылған күннен бастап 5 жыл. Келісімді кері қайтарып алу — жазбаша хабарлама арқылы.':'5 лет с даты подписания. Согласие может быть отозвано путём письменного уведомления.',y);
+  y=hl(doc,lang==='kz'?'ҚР 21.05.2013 ж. №94-V «Дербес деректер және оларды қорғау туралы» Заңы, ҚР 24.11.2015 ж. №418-V «Ақпараттандыру туралы» Заңы негізінде жасалды.':'Составлено на основании Закона РК №94-V от 21.05.2013 «О персональных данных и их защите» и Закона РК №418-V от 24.11.2015 «Об информатизации».',y+2)+2;
+  y=sigBlock(doc,y);
+  footer(doc,2);
+
+  // ===== PAGE 3: ACT =====
+  doc.addPage();
+  y=header(8);
+  y=title(doc,lang==='kz'?`ОРЫНДАЛҒАН ЖҰМЫСТАР АКТІСІ № ${docNum}-А`:`АКТ ВЫПОЛНЕННЫХ РАБОТ № ${docNum}-А`,`${lang==='kz'?'Шарт':'Договор'} № ${docNum} · ${fmtD(docDate)}`,y);
+  y=parties(doc,y)+2;
+  y=section(doc,lang==='kz'?'КӨРСЕТІЛГЕН ҚЫЗМЕТТЕР':'ОКАЗАННЫЕ УСЛУГИ',y);
+  y=bullet(doc,lang==='kz'?'несие тарихын талдау':'анализ кредитной истории Заказчика',y);
+  y=bullet(doc,(lang==='kz'?'несие өнімін іріктеу: ':'подбор кредитного продукта: ')+ct,y);
+  y=bullet(doc,lang==='kz'?'банкке өтінімді дайындау және беру':'подготовка и подача заявки в кредитную организацию',y);
+  y=bullet(doc,lang==='kz'?'несие мақұлдануына дейін сүйемелдеу':'сопровождение до получения одобрения',y);
+  y=section(doc,lang==='kz'?'ҚАРЖЫЛЫҚ ШАРТТАР':'ФИНАНСОВЫЕ УСЛОВИЯ',y+2);
+  if(cAmt) y=body(doc,(lang==='kz'?'Несие сомасы: ':'Сумма кредита: ')+fmt(cAmt)+(lang==='kz'?' теңге':' тенге'),y);
+  if(cFee) y=body(doc,(lang==='kz'?'Орындаушы сыйақысы: ':'Вознаграждение Исполнителя: ')+fmt(cFee)+(lang==='kz'?' теңге':' тенге'),y);
+  y=body(doc,(lang==='kz'?'Төлем мерзімі: несие алғаннан кейін 3 жұмыс күні':'Срок оплаты: 3 рабочих дня после получения кредита'),y);
+  y=hl(doc,lang==='kz'?'Тараптар қызметтердің толық көлемде, тиісті мерзімде және сапада көрсетілгенін растайды. Тапсырыс берушінің Орындаушыға шағымдары жоқ.':'Стороны подтверждают, что услуги оказаны в полном объёме, в установленные сроки и надлежащего качества. Претензий Заказчика к Исполнителю нет.',y+1)+2;
+  y=sigBlock(doc,y);
+  footer(doc,3);
+
+  doc.save(`SUNKAR_FINANCE_${docNum}.pdf`);
+}
+
+// ========== NAV ==========
+const progMap={1:16,2:33,3:50,4:66,5:83,6:100};
+let cur=1;
 function go(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
-  currentScreen=n;
-  const fills={1:25,2:50,3:75,4:100};
-  document.getElementById('progressFill').style.width=fills[n]+'%';
+  cur=n;
+  document.getElementById('PF').style.width=progMap[n]+'%';
   window.scrollTo({top:0,behavior:'smooth'});
-  if(n===3){setTimeout(initCanvas,100)}
+  if(n===5)setTimeout(initCanvas,100);
+  if(n===2||n===3||n===4){
+    const ids=['CHK1','CHK2','CHK3'];
+    ids.forEach((id,i)=>{
+      const el=document.getElementById(id);
+      if(el) el.checked=false;
+      const ag=document.getElementById('AG'+(i+1));
+      if(ag){ag.style.opacity='0.35';ag.style.pointerEvents='none';}
+      const nx=document.getElementById('NXT'+(i+1));
+      if(nx) nx.disabled=true;
+    });
+    buildAll();
+  }
 }
 
-// Init canvas size after load
-window.addEventListener('load',()=>{ if(currentScreen===3)initCanvas(); });
-window.addEventListener('resize',()=>{ if(currentScreen===3)initCanvas(); });
+init();
 </script>
 </body>
 </html>
