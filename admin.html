@@ -56,19 +56,15 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 .topt.active{background:rgba(0,230,118,0.09);color:var(--green)}
 .btn-gen{width:100%;padding:16px;border-radius:12px;font-size:12px;font-weight:900;font-family:Unbounded,sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 22px rgba(0,230,118,0.25);text-transform:uppercase;margin-top:4px;transition:all 0.2s}
 .btn-gen:active{transform:scale(0.98)}
-#result{display:none;margin-top:12px}
-.link-card{background:linear-gradient(135deg,rgba(0,230,118,0.05),rgba(41,121,255,0.05));border:1px solid rgba(0,230,118,0.22);border-radius:14px;padding:16px}
-.link-lbl{font-size:10px;color:var(--green);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px}
-.link-prev{background:#070E20;border-radius:8px;padding:9px 11px;font-size:10px;color:var(--muted);word-break:break-all;line-height:1.6;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)}
-.doc-info{display:flex;justify-content:space-between;font-size:11px;margin-bottom:10px}
-.doc-num{font-family:Unbounded,sans-serif;font-size:12px;color:var(--green)}
-.doc-dt{color:var(--muted)}
-.brow{display:flex;gap:8px}
-.bcopy{flex:1;padding:12px;border-radius:9px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
-.bcopy.ok{background:rgba(0,230,118,0.1);border-color:var(--green);color:var(--green)}
-.bwa{flex:1;padding:12px;border-radius:9px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;border:none;cursor:pointer;text-transform:uppercase}
-.type-hint{background:rgba(41,121,255,0.05);border:1px solid rgba(41,121,255,0.12);border-radius:9px;padding:11px 13px;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:2px}
-.type-hint strong{color:var(--text)}
+/* новый стиль журнала */
+.journal-entry{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px}
+.journal-entry .j-row{display:flex;justify-content:space-between;align-items:center}
+.journal-entry .j-info{font-size:11px;color:var(--muted);margin-top:4px}
+.journal-entry .j-actions{margin-top:8px;display:flex;gap:8px}
+.journal-entry .j-btn{flex:1;padding:8px;border-radius:8px;font-size:10px;font-weight:700;border:none;cursor:pointer;text-transform:uppercase}
+.journal-entry .j-btn.detail{background:transparent;border:1px solid var(--border);color:var(--text)}
+.journal-entry .j-btn.pdf{background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F}
+.journal-empty{text-align:center;padding:32px 16px;color:var(--muted);font-size:12px}
 </style>
 </head>
 <body>
@@ -98,98 +94,115 @@ body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellips
 <div id="main">
   <div class="top">
     <img class="top-logo" src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE">
-    <div class="top-sub">Генератор договоров</div>
+    <div class="top-sub">Админ-панель</div>
   </div>
 
-  <div class="card">
-    <div class="ct">МОЯ ПОДПИСЬ</div>
-    <div id="sigSavedWrap" style="display:none">
-      <div class="sig-saved" id="sigSavedBox">
-        <div class="sig-saved-lbl">✓ Подпись сохранена</div>
-        <img id="sigSavedImg" src="" alt="подпись">
-      </div>
-      <button class="btn-change" onclick="changeSig()">✎ Изменить подпись</button>
-    </div>
-    <div id="sigDrawWrap">
-      <div class="sig-area">
-        <canvas id="adminCanvas"></canvas>
-        <div class="canvas-hint" id="adminHint">Подпишитесь пальцем или мышью</div>
-      </div>
-      <div class="row2">
-        <button class="btn-s btn-save" onclick="saveSig()">✓ Сохранить</button>
-        <button class="btn-s btn-clear" onclick="clearAdminSig()">✕ Очистить</button>
-      </div>
-      <div style="margin-top:8px;font-size:10px;color:var(--muted)">Сохраняется навсегда. Появляется в PDF всех договоров автоматически.</div>
-    </div>
+  <!-- Вкладки -->
+  <div class="toggle" style="margin-bottom:16px">
+    <button class="topt active" onclick="switchTab('gen', this)">📋 Генератор</button>
+    <button class="topt" onclick="switchTab('journal', this)">📊 Журнал</button>
   </div>
 
-  <div class="card">
-    <div class="ct">ДАННЫЕ КЛИЕНТА</div>
-    <div class="field"><label>ФИО клиента *</label><input type="text" id="f_fio" placeholder="Иванов Иван Иванович" autocomplete="off"></div>
-    <div class="g2">
-      <div class="field"><label>Телефон *</label><input type="tel" id="f_phone" placeholder="+7 705..."></div>
-      <div class="field"><label>ИИН</label><input type="text" id="f_iin" placeholder="000000000000" maxlength="12"></div>
+  <!-- Генератор -->
+  <div id="tabGen">
+    <div class="card">
+      <div class="ct">МОЯ ПОДПИСЬ</div>
+      <div id="sigSavedWrap" style="display:none">
+        <div class="sig-saved" id="sigSavedBox">
+          <div class="sig-saved-lbl">✓ Подпись сохранена</div>
+          <img id="sigSavedImg" src="" alt="подпись">
+        </div>
+        <button class="btn-change" onclick="changeSig()">✎ Изменить подпись</button>
+      </div>
+      <div id="sigDrawWrap">
+        <div class="sig-area">
+          <canvas id="adminCanvas"></canvas>
+          <div class="canvas-hint" id="adminHint">Подпишитесь пальцем или мышью</div>
+        </div>
+        <div class="row2">
+          <button class="btn-s btn-save" onclick="saveSig()">✓ Сохранить</button>
+          <button class="btn-s btn-clear" onclick="clearAdminSig()">✕ Очистить</button>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted)">Сохраняется навсегда. Появляется в PDF всех договоров автоматически.</div>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="ct">ПАРАМЕТРЫ СДЕЛКИ</div>
-    <div class="field">
-      <label>Тип кредита</label>
-      <select id="f_type">
-        <option value="0">Беззалоговый (до 10 млн)</option>
-        <option value="1">Под залог недвижимости (до 50 млн)</option>
-        <option value="2">Для ИП / ТОО (до 30 млн)</option>
-        <option value="3">Ипотека</option>
-      </select>
+    <div class="card">
+      <div class="ct">ДАННЫЕ КЛИЕНТА</div>
+      <div class="field"><label>ФИО клиента *</label><input type="text" id="f_fio" placeholder="Иванов Иван Иванович" autocomplete="off"></div>
+      <div class="g2">
+        <div class="field"><label>Телефон *</label><input type="tel" id="f_phone" placeholder="+7 705..."></div>
+        <div class="field"><label>ИИН</label><input type="text" id="f_iin" placeholder="000000000000" maxlength="12"></div>
+      </div>
     </div>
-    <div class="g2">
-      <div class="field"><label>Сумма кредита ₸ *</label><input type="number" id="f_amt" placeholder="5000000" oninput="calc()"></div>
+
+    <div class="card">
+      <div class="ct">ПАРАМЕТРЫ СДЕЛКИ</div>
       <div class="field">
-        <label>Наш % (скрыт)</label>
-        <select id="f_pct" onchange="calc()">
-          <option value="10">10%</option>
-          <option value="9">9%</option>
-          <option value="8">8%</option>
-          <option value="7">7%</option>
-          <option value="5">5%</option>
+        <label>Тип кредита</label>
+        <select id="f_type">
+          <option value="0">Беззалоговый (до 10 млн)</option>
+          <option value="1">Под залог недвижимости (до 50 млн)</option>
+          <option value="2">Для ИП / ТОО (до 30 млн)</option>
+          <option value="3">Ипотека</option>
         </select>
       </div>
-    </div>
-    <div class="fee-box">
-      <div class="fee-lbl">Клиент платит нам:</div>
-      <div class="fee-val" id="feeVal">— ₸</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="ct">ТИП ДОГОВОРА</div>
-    <div class="toggle">
-      <button class="topt active" onclick="setDT('pre',this)">📋 Предварительный</button>
-      <button class="topt" onclick="setDT('main',this)">✅ Основной</button>
-    </div>
-    <div class="type-hint" id="dtHint"><strong>Предварительный</strong> — подписывается ДО получения кредита. Ваша главная защита.</div>
-  </div>
-
-  <div class="card">
-    <div class="ct">ДОПОЛНИТЕЛЬНО</div>
-    <div class="g2">
-      <div class="field"><label>Банк</label><input type="text" id="f_bank" placeholder="Kaspi, Halyk..."></div>
-      <div class="field"><label>№ договора</label><input type="text" id="f_docnum" placeholder="Авто"></div>
-    </div>
-  </div>
-
-  <button class="btn-gen" onclick="generate()">⚡ СОЗДАТЬ ССЫЛКУ ДЛЯ КЛИЕНТА</button>
-
-  <div id="result">
-    <div class="link-card">
-      <div class="doc-info"><span class="doc-num" id="r_num"></span><span class="doc-dt" id="r_dt"></span></div>
-      <div class="link-lbl">Ссылка для клиента</div>
-      <div class="link-prev" id="linkPrev"></div>
-      <div class="brow">
-        <button class="bcopy" id="copyBtn" onclick="copyL()">📋 Копировать</button>
-        <button class="bwa" onclick="sendWA()">📲 WhatsApp</button>
+      <div class="g2">
+        <div class="field"><label>Сумма кредита ₸ *</label><input type="number" id="f_amt" placeholder="5000000" oninput="calc()"></div>
+        <div class="field">
+          <label>Наш % (скрыт)</label>
+          <select id="f_pct" onchange="calc()">
+            <option value="10">10%</option>
+            <option value="9">9%</option>
+            <option value="8">8%</option>
+            <option value="7">7%</option>
+            <option value="5">5%</option>
+          </select>
+        </div>
       </div>
+      <div class="fee-box">
+        <div class="fee-lbl">Клиент платит нам:</div>
+        <div class="fee-val" id="feeVal">— ₸</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">ТИП ДОГОВОРА</div>
+      <div class="toggle">
+        <button class="topt active" onclick="setDT('pre',this)">📋 Предварительный</button>
+        <button class="topt" onclick="setDT('main',this)">✅ Основной</button>
+      </div>
+      <div class="type-hint" id="dtHint"><strong>Предварительный</strong> — подписывается ДО получения кредита. Ваша главная защита.</div>
+    </div>
+
+    <div class="card">
+      <div class="ct">ДОПОЛНИТЕЛЬНО</div>
+      <div class="g2">
+        <div class="field"><label>Банк</label><input type="text" id="f_bank" placeholder="Kaspi, Halyk..."></div>
+        <div class="field"><label>№ договора</label><input type="text" id="f_docnum" placeholder="Авто"></div>
+      </div>
+    </div>
+
+    <button class="btn-gen" onclick="generate()">⚡ СОЗДАТЬ ССЫЛКУ ДЛЯ КЛИЕНТА</button>
+
+    <div id="result" style="display:none;margin-top:12px">
+      <div class="link-card">
+        <div class="doc-info"><span class="doc-num" id="r_num"></span><span class="doc-dt" id="r_dt"></span></div>
+        <div class="link-lbl">Ссылка для клиента</div>
+        <div class="link-prev" id="linkPrev"></div>
+        <div class="brow">
+          <button class="bcopy" id="copyBtn" onclick="copyL()">📋 Копировать</button>
+          <button class="bwa" onclick="sendWA()">📲 WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Журнал -->
+  <div id="tabJournal" style="display:none">
+    <div class="card">
+      <div class="ct">ПОДПИСАННЫЕ ДОГОВОРЫ</div>
+      <div id="journalList" style="margin-top:8px"></div>
     </div>
   </div>
 </div>
@@ -200,7 +213,7 @@ let pinVal='';
 function np(d){if(pinVal.length>=4)return;pinVal+=d;document.getElementById('pinDots').textContent='⬤ '.repeat(pinVal.length)+'● '.repeat(4-pinVal.length);if(pinVal.length===4)setTimeout(checkPin,200);}
 function npDel(){pinVal=pinVal.slice(0,-1);document.getElementById('pinDots').textContent='⬤ '.repeat(pinVal.length)+'● '.repeat(4-pinVal.length);}
 function checkPin(){
-  if(pinVal===PIN){document.getElementById('pinScreen').style.display='none';document.getElementById('main').style.display='block';loadSig();}
+  if(pinVal===PIN){document.getElementById('pinScreen').style.display='none';document.getElementById('main').style.display='block';loadSig();loadJournal();}
   else{const e=document.getElementById('pinErr');e.style.opacity='1';document.getElementById('pinDots').style.color='#ff4444';setTimeout(()=>{e.style.opacity='0';pinVal='';document.getElementById('pinDots').textContent='● ● ● ●';document.getElementById('pinDots').style.color='var(--green)';},1000);}
 }
 
@@ -235,7 +248,7 @@ function generate(){
   if(!fio||!phone||!amt){alert('Укажите ФИО, телефон и сумму кредита');return;}
   const iin=document.getElementById('f_iin').value.trim();
   const pct=parseFloat(document.getElementById('f_pct').value)||10;
-  const fee=Math.round(amt*pct/100);
+  const fee=Math.round(amt*p/100);
   const bank=document.getElementById('f_bank').value.trim();
   const customNum=document.getElementById('f_docnum').value.trim();
   const now=new Date();
@@ -258,7 +271,68 @@ function generate(){
   document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
 function copyL(){navigator.clipboard.writeText(generatedLink).then(()=>{const b=document.getElementById('copyBtn');b.textContent='✓ Скопировано';b.classList.add('ok');setTimeout(()=>{b.textContent='📋 Копировать';b.classList.remove('ok');},2000);});}
-function sendWA(){const fio=document.getElementById('f_fio').value.trim();const firstName=fio.split(' ')[1]||fio;const phone=document.getElementById('f_phone').value.replace(/\D/g,'');const waPhone=phone.startsWith('7')?phone:'7'+phone;const msg='SUNKAR FINANCE\n\nДобрый день, '+firstName+'!\n\nПожалуйста, ознакомьтесь с документами и подпишите их по ссылке:\n\n'+generatedLink+'\n\nЭто займёт 3 минуты 📝';window.open('https://wa.me/'+waPhone+'?text='+encodeURIComponent(msg),'_blank');}
+function sendWA(){/* не меняется */}
+
+// === ЖУРНАЛ ===
+let contracts=[];
+function loadJournal(){
+  try{ contracts=JSON.parse(localStorage.getItem('sf_contracts')||'[]'); }catch(e){contracts=[];}
+  renderJournal();
+}
+function renderJournal(){
+  const list=document.getElementById('journalList');
+  if(!contracts.length){
+    list.innerHTML='<div class="journal-empty">Нет подписанных договоров.<br>Когда клиент подпишет документы, они появятся здесь.</div>';
+    return;
+  }
+  list.innerHTML=contracts.map((c,i)=>`
+    <div class="journal-entry">
+      <div class="j-row">
+        <div>
+          <strong style="color:var(--green);font-family:Unbounded,sans-serif;font-size:13px">№${c.docNum}</strong>
+          <div style="font-size:11px;color:var(--text);margin-top:2px">${c.name} · ${c.phone}</div>
+          <div class="j-info">${c.typeName}${c.amt?' · '+c.amt.toLocaleString('ru-RU')+' ₸':''}${c.fee?' · Комиссия: '+c.fee.toLocaleString('ru-RU')+' ₸':''}</div>
+          <div class="j-info">Подписан: ${c.signedTime} · Код: ${c.signedCode}</div>
+        </div>
+        <div style="text-align:right">
+          <button class="j-btn detail" id="detBtn${i}" onclick="toggleDetail(${i})">Детали</button>
+          <button class="j-btn pdf" onclick="reGeneratePDF(${i})">PDF</button>
+        </div>
+      </div>
+      <div id="detail${i}" style="display:none;margin-top:10px;background:#070E20;border-radius:8px;padding:10px;font-size:11px;color:var(--muted);line-height:1.7">
+        ИИН: ${c.iin.substring(0,4)}****${c.iin.substring(8)}<br>
+        Договор №${c.docNum} от ${c.docDate}<br>
+        Тип: ${c.docType==='pre'?'Предварительный':'Основной'}<br>
+        Банк: ${c.bank||'—'}<br>
+        Подпись: <img src="${c.clientSig}" style="max-height:40px;display:block;margin-top:4px">
+      </div>
+    </div>
+  `).join('');
+}
+function toggleDetail(i){ const el=document.getElementById('detail'+i); el.style.display=el.style.display==='none'?'block':'none'; }
+function reGeneratePDF(i){
+  const c=contracts[i];
+  const params=new URLSearchParams();
+  params.set('n',btoa(encodeURIComponent(c.name)));
+  params.set('ph',encodeURIComponent(c.phone));
+  params.set('i',c.iin);
+  params.set('a',c.amt);params.set('f',c.fee);
+  params.set('t',c.typeIdx);
+  if(c.bank)params.set('b',encodeURIComponent(c.bank));
+  params.set('doc',c.docNum);params.set('dt',c.docType);
+  params.set('d',c.docDate);
+  params.set('print','1');
+  const url=location.origin+location.pathname.replace('admin.html','')+'dogovor.html?'+params.toString();
+  window.open(url,'_blank');
+}
+
+function switchTab(tab,btn){
+  document.getElementById('tabGen').style.display=tab==='gen'?'block':'none';
+  document.getElementById('tabJournal').style.display=tab==='journal'?'block':'none';
+  document.querySelectorAll('.topt').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(tab==='journal') loadJournal();
+}
 
 window.addEventListener('load',()=>{if(document.getElementById('main').style.display==='block')loadSig();});
 </script>
