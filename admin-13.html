@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SUNKAR FINANCE — Админка</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060D1F;--card:#0F1D38;--green:#00E676;--blue:#2979FF;--text:#E8EFF8;--muted:#7A8FA6;--border:rgba(0,230,118,0.15)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(0,230,118,0.05) 0%,transparent 55%),radial-gradient(ellipse at 80% 80%,rgba(41,121,255,0.05) 0%,transparent 55%);pointer-events:none}
+#pinScreen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:100}
+.pin-logo{font-family:Unbounded,sans-serif;font-size:18px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.pin-sub{font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:32px}
+.pin-lbl{font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.pin-err{color:#ff4444;font-size:11px;margin-top:10px;opacity:0;transition:opacity 0.3s}
+.pin-dots{font-size:28px;color:var(--green);letter-spacing:12px;margin-bottom:20px;font-family:Unbounded,sans-serif;min-height:36px}
+.numpad{display:grid;grid-template-columns:repeat(3,72px);gap:10px}
+.np{width:72px;height:72px;border-radius:50%;background:#0F1D38;border:1px solid var(--border);color:var(--text);font-size:22px;font-family:Unbounded,sans-serif;font-weight:700;cursor:pointer;transition:all 0.15s}
+.np:active{background:rgba(0,230,118,0.15);border-color:var(--green);transform:scale(0.93)}
+.np-del{font-size:18px;color:var(--muted)}
+.np-ok{background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;border:none;font-size:20px}
+#main{display:none;max-width:500px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1}
+.top{text-align:center;margin-bottom:20px;padding-top:8px}
+.top-logo{height:44px;width:auto;display:block;margin:0 auto 6px;filter:drop-shadow(0 0 12px rgba(0,230,118,0.3))}
+.top-sub{font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+
+/* TABS */
+.tab-row{display:flex;gap:6px;margin-bottom:16px}
+.tab{flex:1;padding:11px 8px;border-radius:10px;font-size:10px;font-weight:700;font-family:Unbounded,sans-serif;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;text-align:center;text-transform:uppercase;letter-spacing:0.04em;transition:all 0.2s}
+.tab.active{background:rgba(0,230,118,0.08);border-color:var(--green);color:var(--green)}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px}
+.ct{font-family:Unbounded,sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:0.05em}
+.ct::before{content:"";width:3px;height:14px;background:linear-gradient(var(--green),var(--blue));border-radius:2px}
+.sig-area{background:#070E20;border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;position:relative;margin-bottom:7px}
+#adminCanvas{display:block;width:100%;height:120px;cursor:crosshair;touch-action:none}
+.canvas-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;color:var(--muted);pointer-events:none;text-align:center}
+.row2{display:flex;gap:8px}
+.btn-s{flex:1;padding:10px;border-radius:9px;font-size:11px;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;border:none;transition:all 0.2s}
+.btn-save{background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F}
+.btn-clear{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted)}
+.btn-change{background:transparent;border:1px solid rgba(0,230,118,0.2);color:var(--green);font-size:11px;width:100%;padding:9px;border-radius:9px;cursor:pointer;font-family:Inter,sans-serif;margin-top:7px}
+.sig-saved{display:none;background:#070E20;border:1px solid rgba(0,230,118,0.2);border-radius:10px;padding:10px;text-align:center;margin-bottom:10px}
+.sig-saved-lbl{font-size:10px;color:var(--green);font-weight:700;margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase}
+.sig-saved img{max-height:50px}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
+.field input,.field select{width:100%;background:#070E20;border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:12px 13px;font-size:14px;color:var(--text);font-family:Inter,sans-serif;outline:none;transition:border-color 0.2s;-webkit-appearance:none}
+.field input:focus,.field select:focus{border-color:var(--green)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fee-box{background:linear-gradient(135deg,rgba(0,230,118,0.05),rgba(41,121,255,0.05));border:1px solid rgba(0,230,118,0.18);border-radius:10px;padding:13px;margin-top:2px}
+.fee-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+.fee-val{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;color:var(--green)}
+.toggle{display:flex;background:#070E20;border-radius:9px;overflow:hidden;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}
+.topt{flex:1;padding:11px 6px;text-align:center;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;border:none;background:transparent;font-family:Inter,sans-serif;transition:all 0.2s}
+.topt.active{background:rgba(0,230,118,0.09);color:var(--green)}
+.btn-gen{width:100%;padding:16px;border-radius:12px;font-size:12px;font-weight:900;font-family:Unbounded,sans-serif;border:none;cursor:pointer;background:linear-gradient(135deg,var(--green),#00BFA5);color:#060D1F;letter-spacing:0.06em;box-shadow:0 0 22px rgba(0,230,118,0.25);text-transform:uppercase;margin-top:4px;transition:all 0.2s}
+.btn-gen:active{transform:scale(0.98)}
+#result{display:none;margin-top:12px}
+.link-card{background:linear-gradient(135deg,rgba(0,230,118,0.05),rgba(41,121,255,0.05));border:1px solid rgba(0,230,118,0.22);border-radius:14px;padding:16px}
+.link-lbl{font-size:10px;color:var(--green);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px}
+.link-prev{background:#070E20;border-radius:8px;padding:9px 11px;font-size:10px;color:var(--muted);word-break:break-all;line-height:1.6;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)}
+.doc-info{display:flex;justify-content:space-between;font-size:11px;margin-bottom:10px}
+.doc-num{font-family:Unbounded,sans-serif;font-size:12px;color:var(--green)}
+.doc-dt{color:var(--muted)}
+.brow{display:flex;gap:8px}
+.bcopy{flex:1;padding:12px;border-radius:9px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
+.bcopy.ok{background:rgba(0,230,118,0.1);border-color:var(--green);color:var(--green)}
+.bwa{flex:1;padding:12px;border-radius:9px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:Unbounded,sans-serif;font-size:10px;font-weight:700;border:none;cursor:pointer;text-transform:uppercase}
+.type-hint{background:rgba(41,121,255,0.05);border:1px solid rgba(41,121,255,0.12);border-radius:9px;padding:11px 13px;font-size:11px;color:var(--muted);line-height:1.6}
+.type-hint strong{color:var(--text)}
+
+/* JOURNAL */
+.journal-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
+.journal-empty .icon{font-size:40px;margin-bottom:12px}
+.jcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all 0.2s}
+.jcard:hover{border-color:rgba(0,230,118,0.3)}
+.jcard-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.jcard-num{font-family:Unbounded,sans-serif;font-size:11px;font-weight:700;color:var(--green)}
+.jcard-date{font-size:10px;color:var(--muted)}
+.jcard-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.jcard-phone{font-size:12px;color:var(--muted)}
+.jcard-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)}
+.jcard-type{font-size:10px;color:var(--muted);max-width:60%}
+.jcard-amt{font-family:Unbounded,sans-serif;font-size:13px;font-weight:700;color:var(--text)}
+.jcard-fee{font-size:11px;color:var(--blue)}
+.jcard-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em}
+.badge-pre{background:rgba(255,200,0,0.1);border:1px solid rgba(255,200,0,0.2);color:#FFD54F}
+.badge-main{background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);color:var(--green)}
+.journal-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.stat-val{font-family:Unbounded,sans-serif;font-size:20px;font-weight:700;color:var(--green);margin-bottom:3px}
+.stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+.btn-clear-journal{width:100%;padding:10px;background:transparent;border:1px solid rgba(255,80,80,0.2);border-radius:9px;color:rgba(255,80,80,0.5);font-size:11px;cursor:pointer;font-family:Inter,sans-serif;margin-top:8px}
+.btn-clear-journal:hover{border-color:rgba(255,80,80,0.5);color:rgba(255,80,80,0.8)}
+</style>
+</head>
+<body>
+
+<div id="pinScreen">
+  <div class="pin-logo">SUNKAR FINANCE</div>
+  <div class="pin-sub">Панель управления</div>
+  <div class="pin-lbl">PIN-код</div>
+  <div class="pin-dots" id="pinDots">● ● ● ●</div>
+  <div class="numpad">
+    <button class="np" onclick="np(1)">1</button><button class="np" onclick="np(2)">2</button><button class="np" onclick="np(3)">3</button>
+    <button class="np" onclick="np(4)">4</button><button class="np" onclick="np(5)">5</button><button class="np" onclick="np(6)">6</button>
+    <button class="np" onclick="np(7)">7</button><button class="np" onclick="np(8)">8</button><button class="np" onclick="np(9)">9</button>
+    <button class="np np-del" onclick="npDel()">⌫</button><button class="np" onclick="np(0)">0</button><button class="np np-ok" onclick="checkPin()">✓</button>
+  </div>
+  <div class="pin-err" id="pinErr">Неверный PIN</div>
+</div>
+
+<div id="main">
+  <div class="top">
+    <img class="top-logo" src="https://sunkar-finance-astana.github.io/KZ/img/logo-full.png" alt="SUNKAR FINANCE">
+    <div class="top-sub">Панель управления</div>
+  </div>
+
+  <div class="tab-row">
+    <button class="tab active" onclick="switchTab('new',this)">➕ Новый</button>
+    <button class="tab" onclick="switchTab('journal',this)">📋 Журнал</button>
+  </div>
+
+  <!-- NEW CONTRACT TAB -->
+  <div id="tabNew">
+    <div class="card">
+      <div class="ct">МОЯ ПОДПИСЬ</div>
+      <div id="sigSavedWrap" style="display:none">
+        <div class="sig-saved" id="sigSavedBox">
+          <div class="sig-saved-lbl">✓ Подпись сохранена</div>
+          <img id="sigSavedImg" src="" alt="">
+        </div>
+        <button class="btn-change" onclick="changeSig()">✎ Изменить подпись</button>
+      <button class="btn-change" style="margin-top:6px;background:rgba(41,121,255,0.08);border-color:rgba(41,121,255,0.3);color:var(--blue)" onclick="embedSigInFile()">⬇ Скачать dogovor.html с моей подписью</button>
+      </div>
+      <div id="sigDrawWrap">
+        <div class="sig-area"><canvas id="adminCanvas"></canvas><div class="canvas-hint" id="adminHint">Подпишитесь пальцем или мышью</div></div>
+        <div class="row2">
+          <button class="btn-s btn-save" onclick="saveSig()">✓ Сохранить</button>
+          <button class="btn-s btn-clear" onclick="clearAdminSig()">✕ Очистить</button>
+        </div>
+        <div style="margin-top:7px;font-size:10px;color:var(--muted)">Сохраняется навсегда. Появляется в PDF всех договоров.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">ДАННЫЕ КЛИЕНТА</div>
+      <div class="field"><label>ФИО клиента *</label><input type="text" id="f_fio" placeholder="Иванов Иван Иванович" autocomplete="off"></div>
+      <div class="g2">
+        <div class="field"><label>Телефон *</label><input type="tel" id="f_phone" placeholder="+7 705..."></div>
+        <div class="field"><label>ИИН</label><input type="text" id="f_iin" placeholder="000000000000" maxlength="12"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">ПАРАМЕТРЫ СДЕЛКИ</div>
+      <div class="field">
+        <label>Тип кредита</label>
+        <select id="f_type">
+          <option value="0">Беззалоговый (до 10 млн)</option>
+          <option value="1">Под залог недвижимости (до 50 млн)</option>
+          <option value="2">Для ИП / ТОО (до 30 млн)</option>
+          <option value="3">Ипотека</option>
+        </select>
+      </div>
+      <div class="g2">
+        <div class="field"><label>Сумма кредита ₸ *</label><input type="number" id="f_amt" placeholder="5000000" oninput="calc()"></div>
+        <div class="field">
+          <label>Наш % (скрыт)</label>
+          <select id="f_pct" onchange="calc()">
+            <option value="10">10%</option><option value="9">9%</option>
+            <option value="8">8%</option><option value="7">7%</option><option value="5">5%</option>
+          </select>
+        </div>
+      </div>
+      <div class="fee-box"><div class="fee-lbl">Комиссия за услугу:</div><div class="fee-val" id="feeVal">— ₸</div></div>
+    </div>
+
+    <div class="card">
+      <div class="ct">ТИП ДОГОВОРА</div>
+      <div class="toggle">
+        <button class="topt active" onclick="setDT('pre',this)">📋 Предварительный</button>
+        <button class="topt" onclick="setDT('main',this)">✅ Основной</button>
+      </div>
+      <div class="type-hint" id="dtHint"><strong>Предварительный</strong> — подписывается ДО получения кредита. Ваша главная защита от кидалова.</div>
+    </div>
+
+    <div class="card">
+      <div class="ct">ДОПОЛНИТЕЛЬНО</div>
+      <div class="g2">
+        <div class="field"><label>Банк</label><input type="text" id="f_bank" placeholder="Kaspi, Halyk..."></div>
+        <div class="field"><label>№ договора</label><input type="text" id="f_docnum" placeholder="Авто"></div>
+      </div>
+    </div>
+
+    <button class="btn-gen" onclick="generate()">⚡ СОЗДАТЬ ССЫЛКУ ДЛЯ КЛИЕНТА</button>
+
+    <div id="result">
+      <div class="link-card">
+        <div class="doc-info"><span class="doc-num" id="r_num"></span><span class="doc-dt" id="r_dt"></span></div>
+        <div class="link-lbl">Ссылка для клиента</div>
+        <div class="link-prev" id="linkPrev"></div>
+        <div class="brow">
+          <button class="bcopy" id="copyBtn" onclick="copyL()">📋 Копировать</button>
+          <button class="bwa" onclick="sendWA()">📲 WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNAL TAB -->
+  <div id="tabJournal" style="display:none">
+    <div class="journal-stats" id="journalStats"></div>
+    <div id="journalList"></div>
+  </div>
+</div>
+
+<script>
+const PIN='2025';
+let pinVal='';
+function np(d){if(pinVal.length>=4)return;pinVal+=String(d);document.getElementById('pinDots').textContent='⬤ '.repeat(pinVal.length)+'● '.repeat(4-pinVal.length);if(pinVal.length===4)setTimeout(checkPin,200);}
+function npDel(){pinVal=pinVal.slice(0,-1);document.getElementById('pinDots').textContent='⬤ '.repeat(pinVal.length)+'● '.repeat(4-pinVal.length);}
+function checkPin(){
+  if(pinVal===PIN){document.getElementById('pinScreen').style.display='none';document.getElementById('main').style.display='block';loadSig();}
+  else{const e=document.getElementById('pinErr');e.style.opacity='1';document.getElementById('pinDots').style.color='#ff4444';setTimeout(()=>{e.style.opacity='0';pinVal='';document.getElementById('pinDots').textContent='● ● ● ●';document.getElementById('pinDots').style.color='var(--green)';} ,1000);}
+}
+
+// TABS
+function switchTab(tab,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tabNew').style.display=tab==='new'?'block':'none';
+  document.getElementById('tabJournal').style.display=tab==='journal'?'block':'none';
+  if(tab==='journal') renderJournal();
+}
+
+// JOURNAL
+function getContracts(){try{return JSON.parse(localStorage.getItem('sf_contracts')||'[]');}catch(e){return [];}}
+function fmt(n){return n.toLocaleString('ru-RU');}
+
+function renderJournal(){
+  const contracts=getContracts();
+  const statsEl=document.getElementById('journalStats');
+  const listEl=document.getElementById('journalList');
+  if(!contracts.length){
+    statsEl.innerHTML='';
+    listEl.innerHTML='<div class="journal-empty"><div class="icon">📋</div><div>Пока нет подписанных договоров</div><div style="margin-top:6px;font-size:11px">Отправьте ссылку клиенту — и договор появится здесь автоматически</div></div>';
+    return;
+  }
+  const totalAmt=contracts.reduce((s,c)=>s+(c.amt||0),0);
+  const totalFee=contracts.reduce((s,c)=>s+(c.fee||0),0);
+  statsEl.innerHTML=`
+    <div class="stat-card"><div class="stat-val">${contracts.length}</div><div class="stat-lbl">Договоров</div></div>
+    <div class="stat-card"><div class="stat-val" style="font-size:14px">${fmt(totalFee)} ₸</div><div class="stat-lbl">Комиссий всего</div></div>`;
+  listEl.innerHTML=contracts.map((c,i)=>`
+    <div class="jcard" onclick="openContract(${i})">
+      <div class="jcard-header">
+        <div><div class="jcard-num">№ ${c.docNum}</div><div class="jcard-date">${c.signedTime}</div></div>
+        <div class="jcard-badge ${c.docType==='pre'?'badge-pre':'badge-main'}">${c.docType==='pre'?'Предварит.':'Основной'}</div>
+      </div>
+      <div class="jcard-name">${c.name}</div>
+      <div class="jcard-phone">${c.phone}${c.iin?' · ИИН: '+c.iin.substring(0,4)+'****'+c.iin.substring(8):''}</div>
+      <div class="jcard-row">
+        <div class="jcard-type">${c.type}${c.bank?' · '+c.bank:''}</div>
+        <div><div class="jcard-amt">${c.amt?fmt(c.amt)+' ₸':'—'}</div><div class="jcard-fee">${c.fee?'Комиссия: '+fmt(c.fee)+' ₸':''}</div></div>
+      </div>
+    </div>`).join('')+
+  `<button class="btn-clear-journal" onclick="clearJournal()">🗑 Очистить журнал</button>`;
+}
+
+function openContract(i){
+  const c=getContracts()[i];
+  if(!c) return;
+  const info=`SUNKAR FINANCE · Договор ${c.docNum}
+
+Клиент: ${c.name}
+Телефон: ${c.phone}
+${c.iin?'ИИН: '+c.iin+'\n':''}Услуга: ${c.type}
+${c.amt?'Кредит: '+fmt(c.amt)+' ₸\n':''}${c.fee?'Комиссия: '+fmt(c.fee)+' ₸\n':''}Договор: №${c.docNum}
+Подписан: ${c.signedTime}
+Код: ${c.code}`;
+  if(navigator.share){navigator.share({title:'Договор '+c.docNum,text:info});}
+  else{navigator.clipboard.writeText(info).then(()=>alert('✓ Данные скопированы!'));}
+}
+
+function clearJournal(){
+  if(confirm('Очистить весь журнал договоров?')){localStorage.removeItem('sf_contracts');renderJournal();}
+}
+
+// ADMIN SIGNATURE
+const aC=document.getElementById('adminCanvas');
+const aCtx=aC.getContext('2d');
+let aDrawing=false,aHasSig=false;
+function initAdminCanvas(){const dpr=window.devicePixelRatio||1;aC.width=(aC.offsetWidth||340)*dpr;aC.height=120*dpr;aCtx.scale(dpr,dpr);aCtx.strokeStyle='#1a237e';aCtx.lineWidth=2.5;aCtx.lineCap='round';aCtx.lineJoin='round';}
+function getAP(e){const r=aC.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return{x:s.clientX-r.left,y:s.clientY-r.top};}
+aC.addEventListener('mousedown',e=>{aDrawing=true;const p=getAP(e);aCtx.beginPath();aCtx.moveTo(p.x,p.y);});
+aC.addEventListener('mousemove',e=>{if(!aDrawing)return;const p=getAP(e);aCtx.lineTo(p.x,p.y);aCtx.stroke();aHasSig=true;document.getElementById('adminHint').style.opacity='0';});
+aC.addEventListener('mouseup',()=>aDrawing=false);
+aC.addEventListener('touchstart',e=>{e.preventDefault();aDrawing=true;const p=getAP(e);aCtx.beginPath();aCtx.moveTo(p.x,p.y);},{passive:false});
+aC.addEventListener('touchmove',e=>{e.preventDefault();if(!aDrawing)return;const p=getAP(e);aCtx.lineTo(p.x,p.y);aCtx.stroke();aHasSig=true;document.getElementById('adminHint').style.opacity='0';},{passive:false});
+aC.addEventListener('touchend',()=>aDrawing=false);
+function clearAdminSig(){aCtx.clearRect(0,0,aC.width,aC.height);aHasSig=false;document.getElementById('adminHint').style.opacity='1';}
+function saveSig(){if(!aHasSig){alert('Сначала поставьте подпись!');return;}const data=aC.toDataURL('image/png');localStorage.setItem('sf_admin_sig',data);showSaved(data);alert('✓ Подпись сохранена!');}
+function loadSig(){setTimeout(()=>{initAdminCanvas();const saved=localStorage.getItem('sf_admin_sig');if(saved)showSaved(saved);},100);}
+function showSaved(data){document.getElementById('sigSavedImg').src=data;document.getElementById('sigSavedWrap').style.display='block';document.getElementById('sigDrawWrap').style.display='none';document.getElementById('sigSavedBox').style.display='block';}
+function changeSig(){document.getElementById('sigSavedWrap').style.display='none';document.getElementById('sigDrawWrap').style.display='block';initAdminCanvas();}
+
+function calc(){const a=parseFloat(document.getElementById('f_amt').value)||0;const p=parseFloat(document.getElementById('f_pct').value)||10;if(!a){document.getElementById('feeVal').textContent='— ₸';return;}document.getElementById('feeVal').textContent=(Math.round(a*p/100)).toLocaleString('ru-RU')+' ₸';}
+document.getElementById('f_iin').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').substring(0,12);});
+
+let docType='pre';
+function setDT(t,el){docType=t;document.querySelectorAll('.topt').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('dtHint').innerHTML=t==='pre'?'<strong>Предварительный</strong> — подписывается ДО получения кредита. Ваша главная защита от кидалова.':'<strong>Основной</strong> — подписывается после получения кредита.';}
+
+let generatedLink='';
+function generate(){
+  const fio=document.getElementById('f_fio').value.trim();
+  const phone=document.getElementById('f_phone').value.trim();
+  const amt=parseFloat(document.getElementById('f_amt').value)||0;
+  if(!fio||!phone||!amt){alert('Укажите ФИО, телефон и сумму кредита');return;}
+  const iin=document.getElementById('f_iin').value.trim();
+  const pct=parseFloat(document.getElementById('f_pct').value)||10;
+  const fee=Math.round(amt*pct/100);
+  const bank=document.getElementById('f_bank').value.trim();
+  const customNum=document.getElementById('f_docnum').value.trim();
+  const now=new Date();
+  const docNum=customNum||('SF-'+now.getFullYear()+'-'+String(Math.floor(Math.random()*9000)+1000));
+  const params=new URLSearchParams();
+  params.set('n',btoa(encodeURIComponent(fio)));
+  params.set('ph',phone);
+  if(iin)params.set('i',iin);
+  params.set('a',amt);
+  params.set('f',fee);
+  params.set('t',document.getElementById('f_type').value);
+  if(bank)params.set('b',bank);
+  params.set('doc',docNum);
+  params.set('dt',docType);
+  params.set('d',now.toISOString().split('T')[0]);
+  const base=location.origin+location.pathname.replace('admin.html','')+'dogovor.html';
+  generatedLink=base+'?'+params.toString();
+  document.getElementById('r_num').textContent='№ '+docNum;
+  document.getElementById('r_dt').textContent=now.toLocaleDateString('ru-RU');
+  document.getElementById('linkPrev').textContent=generatedLink;
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+function copyL(){navigator.clipboard.writeText(generatedLink).then(()=>{const b=document.getElementById('copyBtn');b.textContent='✓ Скопировано';b.classList.add('ok');setTimeout(()=>{b.textContent='📋 Копировать';b.classList.remove('ok');},2000);});}
+function sendWA(){const fio=document.getElementById('f_fio').value.trim();const firstName=fio.split(' ')[1]||fio;const phone=document.getElementById('f_phone').value.replace(/\D/g,'');const waPhone=phone.startsWith('7')?phone:'7'+phone;const msg='SUNKAR FINANCE\n\nДобрый день, '+firstName+'!\n\nПожалуйста, ознакомьтесь с документами и подпишите их по ссылке:\n\n'+generatedLink+'\n\nЭто займёт 3 минуты 📝';window.open('https://wa.me/'+waPhone+'?text='+encodeURIComponent(msg),'_blank');}
+</script>
+</body>
+</html>
